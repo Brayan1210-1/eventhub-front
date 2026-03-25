@@ -1,59 +1,80 @@
 @import "tailwindcss";
 
 @theme {
-  
-  --color-brand-bg: #ADD8E6; 
+
+  --color-brand-bg: #ADD8E6;
   --color-brand-card: #F3EBEB;
-  --color-primary: #386B6A;   
-  --color-secondary: #384B6B;  
+  --color-primary: #386B6A;
+  --color-secondary: #384B6B;
   --color-accent-light: #B7EBA;
   --color-text-main: #1A1A1A;
 
   /* Tipografía-familias  */
- 
-  --font-istok: "Istok Web", sans-serif;
-  --font-inter: "Inter", sans-serif;
-  --font-amiko: "Amiko", sans-serif;
 
-  /*  Tamaños de letras */
-  --text-h1: 70px;
-  --text-h2: 25px;
-  --text-p: 15px;
+  --font-Inter: "Inter";
+  --font-IstokWeb: "IstokWeb";
+  --font-Amiko: "Amiko";
+
+}
+
+@font-face {
+  font-family: "Amiko";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("./assets/fonts/Amiko/Amiko-SemiBold.ttf") format("woff2");
+}
+
+@font-face {
+  font-family: "IstokWeb";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("./assets/fonts/Istok_Web/IstokWeb-Bold.ttf") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  font-size: 18px;
+  src: url("./assets/fonts/Inter/Inter-VariableFont_opsz\_wght.ttf") format("woff2");
+}
+
+body {
+  @apply bg-brand-bg
 }
 
 @layer components {
   .typography {
-    
+
     h1 {
-      font-family: var(--font-istok);
-      font-weight: var(--font-weight-bold);
-      font-size: var(--text-h1);
+      font-family: var(--font-IstokWeb);
+      font-size: 40px;
       color: var(--color-secondary);
       margin-bottom: var(--spacing-4);
     }
 
     h2 {
-      font-family: var(--font-amiko);
-      font-weight: var(--font-weight-semibold);
-      font-size: var(--text-h2);
+      font-family: var(--font-Amiko);
+      font-size: 26px;
       color: var(--color-text-main);
       margin-bottom: var(--spacing-2);
     }
 
     p {
-      font-family: var(--font-inter);
-      font-weight: var(--font-weight-normal);
-      font-size: var(--text-p);
+      font-family: var(--font-Inter);
       color: var(--color-text-main);
       line-height: 1.5;
     }
-   
+
     a {
-      font-family: var(--font-inter);
-      font-size: var(--text-p);
+      font-family: var(--font-Inter);
       color: var(--color-primary);
-      font-weight: var(--font-weight-medium);
+      font-size: 15;
       cursor: pointer;
+
       &:hover {
         text-decoration: underline;
       }
