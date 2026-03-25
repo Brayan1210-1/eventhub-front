@@ -1,12 +1,15 @@
 
+
+import { Button } from './design/atoms/button'
+import { Input } from './design/atoms/input'
 import './index.css'
-import { LoginPage } from './design/molecules/login'
+
 
 function App() {
   return (
     <div className="typography" >
-   
-    <LoginPage />
+    <Input label="probando"></Input>
+     <Button children="boton prueba"></Button>
     </div>
   )
 }
