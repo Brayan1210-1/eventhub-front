@@ -22,7 +22,7 @@
   font-style: normal;
   font-weight: 300 700;
   font-display: swap;
-  src: url("./assets/fonts/Amiko/Amiko-SemiBold.ttf") format("woff2");
+  src: url("./assets/fonts/Amiko/Amiko-SemiBold.ttf") format("truetype");
 }
 
 @font-face {
@@ -30,7 +30,7 @@
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
-  src: url("./assets/fonts/Istok_Web/IstokWeb-Bold.ttf") format("woff2");
+  src: url("./assets/fonts/Istok_Web/IstokWeb-Bold.ttf") format("truetype");
 }
 
 @font-face {
@@ -39,7 +39,7 @@
   font-weight: 200 700;
   font-display: swap;
   font-size: 18px;
-  src: url("./assets/fonts/Inter/Inter-VariableFont_opsz\_wght.ttf") format("woff2");
+  src: url("./assets/fonts/Inter/Inter-VariableFont_opsz\_wght.ttf") format("truetype");
 }
 
 body {
@@ -66,13 +66,14 @@ body {
     p {
       font-family: var(--font-Inter);
       color: var(--color-text-main);
+      font-size: 15px;
       line-height: 1.5;
     }
 
     a {
       font-family: var(--font-Inter);
       color: var(--color-primary);
-      font-size: 15;
+      font-size: 15px;
       cursor: pointer;
 
       &:hover {
