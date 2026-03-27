@@ -1,9 +1,9 @@
 import './index.css'
-import Navbar from './modules/navbar/Navbar'
+import Navbar from './components/organisms/navbar/Navbar'
 
 function App() {
   return (
-    <div>
+    <div className="typography">
       <Navbar />
     </div>
   )
