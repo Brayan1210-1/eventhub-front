@@ -1,7 +1,7 @@
 
-import { RegisterForm } from '@/design/molecules/register'
+import { RegisterPage } from '@/design/page/RegisterPage'
 import './index.css'
-import { Navbar } from './design/molecules/navbar'
+
 
 
 function App() {
@@ -9,14 +9,8 @@ function App() {
    
     <div>
     
-    <div>
-      <Navbar></Navbar>
-    </div>
-   
-     <div className="m-8">
-      <RegisterForm></RegisterForm>
-    </div>
-    
+    <RegisterPage />
+
    </div>
   )
 }
