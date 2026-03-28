@@ -1,5 +1,8 @@
 
-import { RegisterPage } from '@/design/page/RegisterPage'
+
+import { LoginForm } from './design/molecules/login'
+import { RegisterForm } from '@/design/molecules/register' 
+import { Navbar } from './design/molecules/navbar'
 import './index.css'
 
 
@@ -7,10 +10,15 @@ import './index.css'
 function App() {
   return (
    
-    <div>
-    
-    <RegisterPage />
-
+    <div >
+     
+   <Navbar></Navbar>
+   
+   <div className='absolute left-5'>  <RegisterForm /></div>
+  
+    <div className= "absolute right-0">
+    <LoginForm />
+    </div>
    </div>
   )
 }
