@@ -19,7 +19,7 @@ export function RegisterForm() {
   };
 
   return (
-    /* El Card ya trae la clase .typography por defecto */
+  
     <Card className="w-full max-w-lg mx-auto">
       <header className="text-center mb-6">
         <h1>Crear Cuenta</h1>
@@ -27,7 +27,7 @@ export function RegisterForm() {
       </header>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-        {/* Fila: Nombre y Apellido */}
+       
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
           <Input
             label="Nombre"
@@ -43,7 +43,7 @@ export function RegisterForm() {
           />
         </div>
 
-        {/* Email */}
+     
         <Input
           label="Correo electrónico"
           type="email"
@@ -52,7 +52,7 @@ export function RegisterForm() {
           {...register("email")}
         />
 
-        {/* Fila: Documento y Teléfono */}
+        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
           <Input
             label="Documento"
@@ -68,7 +68,7 @@ export function RegisterForm() {
           />
         </div>
 
-        {/* Contraseña */}
+
         <Input
           label="Contraseña"
           type="password"
