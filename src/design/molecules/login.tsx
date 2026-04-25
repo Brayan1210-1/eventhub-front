@@ -85,7 +85,7 @@ export function LoginForm() {
             ¿Aún no tienes cuenta?{" "}
             <Link
               to="/registro"
-              className="font-bold text(--color-secondary) hover:text-(--color-primary) transition-colors underline decoration-2 underline-offset-4"
+              className="font-bold text(--color-secondary) hover:text--color-primary transition-colors underline decoration-2 underline-offset-4"
             >
               Regístrate
             </Link>
