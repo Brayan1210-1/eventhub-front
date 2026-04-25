@@ -9,37 +9,6 @@
   --color-accent-light: #B7EBA;
   --color-text-main: #1A1A1A;
 
-  /* Tipografía-familias  */
-
-  --font-Inter: "Inter";
-  --font-IstokWeb: "IstokWeb";
-  --font-Amiko: "Amiko";
-
-}
-
-@font-face {
-  font-family: "Amiko";
-  font-style: normal;
-  font-weight: 300 700;
-  font-display: swap;
-  src: url("./assets/fonts/Amiko/Amiko-SemiBold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "IstokWeb";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("./assets/fonts/Istok_Web/IstokWeb-Bold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 200 700;
-  font-display: swap;
-  font-size: 18px;
-  src: url("./assets/fonts/Inter/Inter-VariableFont_opsz\_wght.ttf") format("truetype");
 }
 
 body {
@@ -50,35 +19,25 @@ body {
   .typography {
 
     h1 {
-      font-family: var(--font-IstokWeb);
+
       font-size: 40px;
       color: var(--color-secondary);
       margin-bottom: var(--spacing-4);
     }
 
     h2 {
-      font-family: var(--font-Amiko);
+
       font-size: 26px;
       color: var(--color-text-main);
       margin-bottom: var(--spacing-2);
     }
 
     p {
-      font-family: var(--font-Inter);
+
       color: var(--color-text-main);
       font-size: 15px;
       line-height: 1.5;
     }
 
-    a {
-      font-family: var(--font-Inter);
-      color: var(--color-primary);
-      font-size: 15px;
-      cursor: pointer;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
   }
 }

@@ -2,10 +2,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-// Importación del esquema desde la ruta modular
 import { loginSchema } from "@/modules/login/schemas/login.schema";
 
-// Importación de tus átomos
 import { Button } from "@/design/atoms/button";
 import { Input } from "@/design/atoms/input";
 import { Card } from "@/design/atoms/card";
