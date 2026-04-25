@@ -14,6 +14,8 @@ export const AppRouter = () => {
                     <Route path="/registro" element={<RegisterPage />} />
                     <Route path="*" element={<h1>páginas en proceso...</h1>} />
                 </Route>
+
+
             </Routes>
         </HashRouter>
     );
