@@ -4,6 +4,7 @@ import { registerSchema, type RegisterType } from "@/modules/register/schemas/re
 import { Input } from "@/design/atoms/input";
 import { Button } from "@/design/atoms/button";
 import { Card } from "@/design/atoms/card";
+import { Link } from "react-router-dom";
 
 export function RegisterForm() {
   const {
@@ -19,15 +20,15 @@ export function RegisterForm() {
   };
 
   return (
-  
+
     <Card className="w-full max-w-lg mx-auto">
       <header className="text-center mb-6">
         <h1>Crear Cuenta</h1>
-        <p>Únete a la plataforma de eventos más técnica.</p>
+        <p>plataforma de eventos superguau</p>
       </header>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-       
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
           <Input
             label="Nombre"
@@ -43,7 +44,7 @@ export function RegisterForm() {
           />
         </div>
 
-     
+
         <Input
           label="Correo electrónico"
           type="email"
@@ -52,7 +53,7 @@ export function RegisterForm() {
           {...register("email")}
         />
 
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
           <Input
             label="Documento"
@@ -78,9 +79,9 @@ export function RegisterForm() {
         />
 
         <div className="pt-4">
-          <Button 
-            type="submit" 
-            className="w-full" 
+          <Button
+            type="submit"
+            className="w-full"
             disabled={isSubmitting}
           >
             {isSubmitting ? "Registrando..." : "Registrarme"}
@@ -90,7 +91,7 @@ export function RegisterForm() {
 
       <footer className="mt-6 text-center">
         <p className="text-sm">
-          ¿Ya tienes una cuenta? <a>Inicia sesión aquí</a>
+          ¿Ya tienes una cuenta? <Link to="/">Inicia sesión aquí</Link>
         </p>
       </footer>
     </Card>
