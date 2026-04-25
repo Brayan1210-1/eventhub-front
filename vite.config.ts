@@ -10,8 +10,11 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] }),
     tailwindcss()
-    
-  ],resolve: {
+
+  ],
+  base: '/eventhub-front',
+
+  resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
