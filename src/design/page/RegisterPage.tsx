@@ -1,15 +1,14 @@
-import { Navbar } from "@/design/molecules/navbar";
 import { RegisterSection } from "@/design/organism/RegisterSection";
 
 export function RegisterPage() {
- 
+
 
   return (
     <div className="min-h-screen flex flex-col">
 
-      <Navbar />
 
-      <main className="flex-grow">
+
+      <main className="grow">
         <RegisterSection />
       </main>
 

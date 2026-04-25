@@ -3,12 +3,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 // Importación del esquema desde la ruta modular
-import { loginSchema } from "@/modules/login/schemas/login.schema"; 
+import { loginSchema } from "@/modules/login/schemas/login.schema";
 
 // Importación de tus átomos
 import { Button } from "@/design/atoms/button";
 import { Input } from "@/design/atoms/input";
 import { Card } from "@/design/atoms/card";
+import { Link } from "react-router-dom";
 
 // Tipado estricto basado en el esquema de Zod
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -29,7 +30,7 @@ export function LoginForm() {
   const onSubmit = async (data: LoginFormValues) => {
     // Aquí es donde mañana conectarás con tu API de Spring Boot
     console.log("Datos listos para EventHub:", data);
-    
+
     // Simulación de delay de red
     await new Promise((resolve) => setTimeout(resolve, 800));
   };
@@ -37,11 +38,11 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-md mx-auto shadow-2xl">
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold text-(--color-secondary) font-[IstokWeb] tracking-tight">
+        <h1 className="text-4xl font-bold text--color-secondary font-[IstokWeb] tracking-tight">
           EventHub
         </h1>
         <p className="text-gray-400 mt-2 text-sm uppercase tracking-widest font-medium">
-          Acceso Administrativo
+          iniciar sesion
         </p>
       </div>
 
@@ -63,17 +64,17 @@ export function LoginForm() {
         />
 
         <div className="flex justify-end -mt-2 mb-8">
-          <button 
-            type="button" 
-            className="text-xs font-semibold text-(--color-primary) hover:brightness-110 transition-all uppercase"
+          <Link to="/recuperar"
+
+            className="text-xs font-semibold text-color-primary hover:brightness-110 transition-all uppercase"
           >
             ¿Recuperar acceso?
-          </button>
+          </Link>
         </div>
 
-        <Button 
-          type="submit" 
-          className="w-full py-3 shadow-lg shadow-(--color-primary)/20" 
+        <Button
+          type="submit"
+          className="w-full py-3 shadow-lg shadow-(--color-primary)/20"
           disabled={isSubmitting}
         >
           {isSubmitting ? "Autenticando..." : "Entrar al Sistema"}
@@ -82,12 +83,12 @@ export function LoginForm() {
         <div className="mt-10 text-center">
           <p className="text-sm text-gray-500">
             ¿Aún no tienes cuenta?{" "}
-            <button 
-              type="button" 
-              className="font-bold text-(--color-secondary) hover:text-(--color-primary) transition-colors underline decoration-2 underline-offset-4"
+            <Link
+              to="/registro"
+              className="font-bold text(--color-secondary) hover:text-(--color-primary) transition-colors underline decoration-2 underline-offset-4"
             >
               Regístrate
-            </button>
+            </Link>
           </p>
         </div>
       </form>
