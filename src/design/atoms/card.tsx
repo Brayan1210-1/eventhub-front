@@ -2,13 +2,13 @@ import React from 'react';
 
 interface CardProps {
   children: React.ReactNode;
-  className?: string; 
+  className?: string;
 }
 
 export function Card({ children, className = "" }: CardProps) {
   return (
     <div
-      className={` bg-(--color-brand-card) 
+      className={` bg-brand-card 
         
         typography
 
@@ -29,7 +29,7 @@ export function Card({ children, className = "" }: CardProps) {
 export function CardHeader({ children, className = "" }: CardProps) {
   return (
     <div
-      className={` bg-(--color-brand-card) 
+      className={` bg-brand-card
         
         typography
 
