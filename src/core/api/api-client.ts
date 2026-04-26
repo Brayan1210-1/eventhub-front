@@ -9,10 +9,11 @@ const apiClient = axios.create({
     },
 });
 
+{/*   JWT para access token */ }
 apiClient.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token');
-    if (token && config.headers) {
-        config.headers.Authorization = `Bearer ${token}`
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken && config.headers) {
+        config.headers.Authorization = `Bearer ${accessToken}`
     }
     return config;
 })
