@@ -1,21 +1,21 @@
 import React, { forwardRef } from 'react';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;    
-  error?: string;   
+  label: string;
+  error?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   function Input({ label, error, className = "", ...props }, ref) {
-    
-   
+
+
     const inputId = React.useId();
 
     return (
       <div className="flex flex-col gap-1.5 w-full mb-4 typography">
-        <label 
+        <label
           htmlFor={inputId}
-          className="text-sm font-semibold text-(--color-secondary) ml-1"
+          className="text-sm font-semibold text-secondary ml-1"
         >
           {label}
         </label>
@@ -26,12 +26,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           className={`
         
             w-full px-4 py-2.5 rounded-xl border transition-all duration-200
-            bg-(--color-brand-card) text-(--color-text-main)
+            bg-brand-card text-text-main
             placeholder:text-gray-400 focus:outline-none
             
-            ${error 
-              ? "border-red-500 ring-1 ring-red-500 shadow-sm" 
-              : "border-gray-300 focus:border-(--color-primary) focus:ring-1 focus:ring-(--color-primary)"
+            ${error
+              ? "border-red-500 ring-1 ring-red-500 shadow-sm"
+              : "border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary"
             }
             
             ${className}
