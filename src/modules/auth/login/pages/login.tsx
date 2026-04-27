@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-import { loginSchema } from "@/modules/login/schemas/login.schema";
+import { loginSchema } from "@/modules/auth/login/schemas/login.schema";
 
 import { Button } from "@/design/atoms/button";
 import { Input } from "@/design/atoms/input";
@@ -72,7 +72,7 @@ export function LoginForm() {
 
         <Button
           type="submit"
-          className="w-full py-3 shadow-lg shadow-(--color-primary)/20"
+          className="w-full py-3 shadow-lg shadow-primary/20"
           disabled={isSubmitting}
         >
           {isSubmitting ? "Autenticando..." : "Entrar al Sistema"}
@@ -82,8 +82,8 @@ export function LoginForm() {
           <p className="text-sm text-gray-500">
             ¿Aún no tienes cuenta?{" "}
             <Link
-              to="/registro"
-              className="font-bold text(--color-secondary) hover:text--color-primary transition-colors underline decoration-2 underline-offset-4"
+              to="/auth/registro"
+              className="font-bold text-secondary hover:text--color-primary transition-colors underline decoration-2 underline-offset-4"
             >
               Regístrate
             </Link>
