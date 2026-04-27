@@ -8,7 +8,6 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   function Input({ label, error, className = "", ...props }, ref) {
 
-
     const inputId = React.useId();
 
     return (
