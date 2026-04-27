@@ -25,11 +25,11 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-4">
-            <NavLink to="/" className="text-sm font-semibold cursor-pointer">
+            <NavLink to="/auth" className="text-sm font-semibold cursor-pointer">
               Iniciar Sesión
             </NavLink>
 
-            <NavLink to="/registro" className="px-6 py-2 text-sm">
+            <NavLink to="/auth/registro" className="px-6 py-2 text-sm">
               Registrarse
             </NavLink>
           </div>

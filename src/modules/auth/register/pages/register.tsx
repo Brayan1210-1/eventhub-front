@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema, type RegisterType } from "@/modules/register/schemas/register.schema";
+import { registerSchema, type RegisterType } from "@/modules/auth/register/schemas/register.schema";
 import { Input } from "@/design/atoms/input";
 import { Button } from "@/design/atoms/button";
 import { Card } from "@/design/atoms/card";
 import { Link } from "react-router-dom";
+import { useRegister } from "../hooks/useRegister";
 
 export function RegisterForm() {
+
+  const { mutate } = useRegister();
   const {
     register,
     handleSubmit,
@@ -16,7 +19,7 @@ export function RegisterForm() {
   });
 
   const onSubmit = (data: RegisterType) => {
-    console.log("Enviando a EventHub API:", data);
+    mutate(data);
   };
 
   return (
@@ -91,7 +94,7 @@ export function RegisterForm() {
 
       <footer className="mt-6 text-center">
         <p className="text-sm">
-          ¿Ya tienes una cuenta? <Link to="/">Inicia sesión aquí</Link>
+          ¿Ya tienes una cuenta? <Link to="/auth">Inicia sesión aquí</Link>
         </p>
       </footer>
     </Card>
