@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL, API_TIMEOUT } from "../config/api.config";
+import { useAuthStore } from "../store/auth.store";
 
 const apiClient = axios.create({
     baseURL: API_BASE_URL,
@@ -11,11 +12,16 @@ const apiClient = axios.create({
 
 {/*  get access token */ }
 apiClient.interceptors.request.use((config) => {
-    const accessToken = localStorage.getItem('access_token');
-    if (accessToken && config.headers) {
-        config.headers.Authorization = `Bearer ${accessToken}`
+    const token = useAuthStore.getState().accessToken;
+
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
-})
+},
+    (error) => {
+        return Promise.reject(error);
+    }
+);
 
 export default apiClient;
