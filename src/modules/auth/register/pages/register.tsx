@@ -6,20 +6,32 @@ import { Button } from "@/design/atoms/button";
 import { Card } from "@/design/atoms/card";
 import { Link } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
+import FormError from "@/design/molecules/FormError";
+import { getApiErrorMessage } from "@/utils/errorController";
 
 export function RegisterForm() {
 
-  const { mutate } = useRegister();
+  const { mutate, isPending } = useRegister();
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    setError,
+    formState: { errors },
   } = useForm<RegisterType>({
     resolver: zodResolver(registerSchema),
   });
 
   const onSubmit = (data: RegisterType) => {
-    mutate(data);
+    mutate(data, {
+      onError: (error) => {
+        const errorMessage = getApiErrorMessage(error);
+
+        setError('root', {
+          type: 'manual',
+          message: errorMessage,
+        });
+      }
+    });
   };
 
   return (
@@ -31,6 +43,8 @@ export function RegisterForm() {
       </header>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+
+        <FormError message={errors.root?.message} type="global" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
           <Input
@@ -85,9 +99,9 @@ export function RegisterForm() {
           <Button
             type="submit"
             className="w-full"
-            disabled={isSubmitting}
+            disabled={isPending}
           >
-            {isSubmitting ? "Registrando..." : "Registrarme"}
+            {isPending ? "Registrando..." : "Registrarme"}
           </Button>
         </div>
       </form>
