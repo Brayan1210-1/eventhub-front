@@ -1,8 +1,18 @@
 import { create } from 'zustand';
+import { jwtDecode } from 'jwt-decode';
+
+
+interface CustomJwtPayload {
+    id: string;
+    email: string;
+    roles: string[];
+    exp: number;
+}
 
 interface AuthState {
     accessToken: string | null;
     isAuthenticated: boolean;
+    roles: string[];
     setToken: (token: string) => void;
     clearAuth: () => void;
 }
@@ -10,6 +20,20 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
     accessToken: null,
     isAuthenticated: false,
-    setToken: (token) => set({ accessToken: token, isAuthenticated: true }),
-    clearAuth: () => set({ accessToken: null, isAuthenticated: false }),
+    roles: [],
+    setToken: (token) => {
+        try {
+
+            const decoded = jwtDecode<CustomJwtPayload>(token);
+
+            set({
+                accessToken: token,
+                isAuthenticated: true,
+                roles: decoded.roles || []
+            });
+        } catch (error) {
+            console.error('Error decodificando el token');
+        }
+    },
+    clearAuth: () => set({ accessToken: null, isAuthenticated: false, roles: [] }),
 }));

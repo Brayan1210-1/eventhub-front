@@ -1,42 +1,81 @@
-import { CardHeader } from "@/design/atoms/card";
 import { NavLink, Outlet } from "react-router-dom";
+import { CardHeader } from "@/design/atoms/card";
+import { useAuthStore } from "@/core/store/auth.store";
+
+type RouteConfig = {
+  name: string;
+  path: string;
+  allowedRoles: string[];
+};
+
+const navigationRoutes: RouteConfig[] = [
+  { name: 'Explorar Eventos', path: '/eventos', allowedRoles: [] },
+  { name: 'Mis Entradas', path: '/mis-entradas', allowedRoles: ['CLIENTE'] },
+  { name: 'Panel Organizador', path: '/organizador/dashboard', allowedRoles: ['ADMIN', 'ORGANIZADOR'] },
+  { name: 'Gestión EventHub', path: '/admin/usuarios', allowedRoles: ['ADMIN'] },
+];
 
 export function Navbar() {
+
+  const { isAuthenticated, roles, clearAuth } = useAuthStore();
+
+  const hasAccess = (allowedRoles: string[]) => {
+    if (allowedRoles.length === 0) return true;
+    // .some() verifica si el usuario tiene al menos UNO de los roles requeridos
+    return roles.some((userRole) => allowedRoles.includes(userRole));
+  };
+
   return (
     <>
-      <CardHeader className="w-full rounded-t-none  flex items-center justify-between shadow-sm">
-
-        <div className="flex items-center gap-2 cursor-pointer">
-          <h2 className="mb-0 text-2xl font-bold text--color-primary">
-            EventHub
-          </h2>
-        </div>
-
+      <CardHeader className="w-full rounded-t-none flex flex-row items-center justify-between shadow-sm p-4 bg-white">
 
         <div className="flex items-center gap-8">
+          <span className="font-bold text-xl text-blue-600">EventHub</span>
 
-          <ul className="hidden md:flex gap-6 items-center list-none p-0 m-0 font-medium">
-            <li>
-              <NavLink to="/eventos" className="hover:text-(--color-primary) transition-colors">Eventos</NavLink>
-            </li>
-            <li>
-              <NavLink to="/nosotros" className="hover:text--color-primary transition-colors">Nosotros</NavLink>
-            </li>
-          </ul>
+          {/* Pintamos las rutas dinámicamente filtrando por permisos */}
+          <nav className="flex gap-4">
+            {navigationRoutes
+              .filter((route) => hasAccess(route.allowedRoles))
+              .map((route) => (
+                <NavLink
+                  key={route.path}
+                  to={route.path}
+                  className={({ isActive }) =>
+                    `text-sm font-medium transition-colors ${isActive
+                      ? "text-blue-600 border-b-2 border-blue-600 pb-1"
+                      : "text-gray-600 hover:text-blue-500"
+                    }`
+                  }
+                >
+                  {route.name}
+                </NavLink>
+              ))}
+          </nav>
+        </div>
 
-          <div className="flex items-center gap-4">
-            <NavLink to="/auth" className="text-sm font-semibold cursor-pointer">
-              Iniciar Sesión
-            </NavLink>
+        <div>
 
-            <NavLink to="/auth/registro" className="px-6 py-2 text-sm">
-              Registrarse
-            </NavLink>
-          </div>
+          {!isAuthenticated ? (
+            <div className="flex gap-4 items-center">
+              <NavLink to="/auth" className="text-sm font-medium text-gray-600 hover:text-gray-900">
+                Iniciar Sesión
+              </NavLink>
+              <NavLink to="/auth/registro" className="text-sm font-medium bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                Registrarse
+              </NavLink>
+            </div>
+          ) : (
+            <button
+              onClick={clearAuth}
+              className="text-sm font-medium text-red-600 border border-red-600 px-4 py-2 rounded-md hover:bg-red-50 transition-colors"
+            >
+              Cerrar Sesión
+            </button>
+          )}
         </div>
       </CardHeader>
 
-      <main>
+      <main className="p-4">
         <Outlet />
       </main>
     </>
