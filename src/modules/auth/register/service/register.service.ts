@@ -2,7 +2,7 @@ import api from '@/core/api/api-client';
 import type { RegisterType } from '../schemas/register.schema';
 
 interface RegisterResponse {
-    access_token: string;
+    accessToken: string;
 }
 
 

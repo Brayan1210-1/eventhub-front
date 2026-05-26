@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { type ApiErrorResponse } from '@/core/api/ApiErrorResponse'; // La interfaz que creamos antes
+import { type ApiErrorResponse } from '@/core/api/apiErrorResponse';
 
 export const getApiErrorMessage = (error: unknown): string => {
 
