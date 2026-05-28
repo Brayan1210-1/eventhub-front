@@ -1,95 +1,86 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-
-import { loginSchema } from "@/modules/auth/login/schemas/login.schema";
-
-import { Button } from "@/design/atoms/button";
+import { loginSchema, type LoginType } from "../schemas/login.schema";
 import { Input } from "@/design/atoms/input";
+import { Button } from "@/design/atoms/button";
 import { Card } from "@/design/atoms/card";
 import { Link } from "react-router-dom";
-
-// Tipado estricto basado en el esquema de Zod
-type LoginFormValues = z.infer<typeof loginSchema>;
+import { useLogin } from "../hooks/useLogin";
+import FormError from "@/design/molecules/FormError";
+import { getApiErrorMessage } from "@/utils/errorController";
 
 export function LoginForm() {
+  const { mutate, isPending } = useLogin();
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<LoginFormValues>({
+    setError,
+    formState: { errors },
+  } = useForm<LoginType>({
     resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
   });
 
-  const onSubmit = async (data: LoginFormValues) => {
-    // Aquí es donde mañana conectarás con tu API de Spring Boot
-    console.log("Datos listos para EventHub:", data);
+  const onSubmit = (data: LoginType) => {
+    mutate(data, {
+      onError: (error) => {
 
-    // Simulación de delay de red
-    await new Promise((resolve) => setTimeout(resolve, 800));
+        const errorMessage = getApiErrorMessage(error);
+
+        setError('root', {
+          type: 'manual',
+          message: errorMessage,
+        });
+      },
+    });
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto shadow-2xl">
-      <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold text--color-secondary font-[IstokWeb] tracking-tight">
-          EventHub
-        </h1>
-        <p className="text-gray-400 mt-2 text-sm uppercase tracking-widest font-medium">
-          iniciar sesion
-        </p>
-      </div>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-        <Input
-          label="Correo Electrónico"
-          type="email"
-          placeholder="nombre@eventhub.com"
-          {...register("email")}
-          error={errors.email?.message}
-        />
-
-        <Input
-          label="Contraseña"
-          type="password"
-          placeholder="••••••••"
-          {...register("password")}
-          error={errors.password?.message}
-        />
-
-        <div className="flex justify-end -mt-2 mb-8">
-          <Link to="/recuperar"
-
-            className="text-xs font-semibold text-color-primary hover:brightness-110 transition-all uppercase"
-          >
-            ¿Recuperar acceso?
-          </Link>
+    <div className="flex min-h-screen items-center justify-center ">
+      <Card className="w-full max-w-md p-8 shadow-lg">
+        <div className="mb-6 text-center">
+          <h1 className="text-2xl font-bold text-gray-900">Iniciar Sesión</h1>
+          <p className="mt-2 text-sm text-gray-600">
+            Ingresa a tu cuenta de EventHub
+          </p>
         </div>
 
-        <Button
-          type="submit"
-          className="w-full py-3 shadow-lg shadow-primary/20"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Autenticando..." : "Entrar al Sistema"}
-        </Button>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
-        <div className="mt-10 text-center">
-          <p className="text-sm text-gray-500">
-            ¿Aún no tienes cuenta?{" "}
-            <Link
-              to="/auth/registro"
-              className="font-bold text-secondary hover:text--color-primary transition-colors underline decoration-2 underline-offset-4"
-            >
-              Regístrate
+          <FormError message={errors.root?.message} type="global" />
+
+          <Input
+            label="Correo Electrónico"
+            type="email"
+            {...register('email')}
+            error={errors.email?.message}
+          />
+
+          <Input
+            label="Contraseña"
+            type="password"
+            {...register('password')}
+            error={errors.password?.message}
+          />
+
+          <Button
+            type="submit"
+            className="w-full mt-6"
+            disabled={isPending}
+          >
+            {isPending ? 'Iniciando sesión...' : 'Ingresar'}
+          </Button>
+        </form>
+
+        <div className="mt-4 text-center text-sm">
+          <p className="text-gray-600">
+            ¿No tienes cuenta?{" "}
+            <Link to="/register" className="text-blue-600 hover:underline font-medium">
+              Regístrate aquí
             </Link>
           </p>
         </div>
-      </form>
-    </Card>
+      </Card>
+    </div>
   );
 }
