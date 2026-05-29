@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { CardHeader } from "@/design/atoms/card";
 import { useAuthStore } from "@/core/store/auth.store";
+import { useLogout } from "@/modules/auth/logout/hooks/useLogout";
 
 type RouteConfig = {
   name: string;
@@ -17,7 +18,9 @@ const navigationRoutes: RouteConfig[] = [
 
 export function Navbar() {
 
-  const { isAuthenticated, roles, clearAuth } = useAuthStore();
+  const { isAuthenticated, roles } = useAuthStore();
+
+  const { mutate: handleLogout, isPending: isLoggingOut } = useLogout();
 
   const hasAccess = (allowedRoles: string[]) => {
     if (allowedRoles.length === 0) return true;
@@ -66,10 +69,11 @@ export function Navbar() {
             </div>
           ) : (
             <button
-              onClick={clearAuth}
+              onClick={() => handleLogout()}
+              disabled={isLoggingOut}
               className="text-sm font-medium text-red-600 border border-red-600 px-4 py-2 rounded-md hover:bg-red-50 transition-colors"
             >
-              Cerrar Sesión
+              {isLoggingOut ? 'Cerrando...' : 'Cerrar Sesión'}
             </button>
           )}
         </div>
