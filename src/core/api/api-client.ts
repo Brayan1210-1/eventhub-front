@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { type InternalAxiosRequestConfig } from "axios";
 import { API_BASE_URL, API_TIMEOUT } from "../config/api.config";
 import { useAuthStore } from "../store/auth.store";
 
@@ -10,6 +10,10 @@ const apiClient = axios.create({
     },
     withCredentials: true,
 });
+
+interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
+    _retry?: boolean;
+}
 
 {/*  get access token */ }
 apiClient.interceptors.request.use((config) => {
@@ -31,9 +35,8 @@ apiClient.interceptors.response.use(
     },
     async (error) => {
 
-        const originalRequest = error.config;
+        const originalRequest = error.config as CustomAxiosRequestConfig;
 
-        // Si el backend devuelve 401 (Token expirado/inválido) y no hemos reintentado
         if (error.response?.status === 401 && !originalRequest._retry) {
 
             originalRequest._retry = true; // Marcamos para evitar bucles infinitos
@@ -46,7 +49,6 @@ apiClient.interceptors.response.use(
                     { withCredentials: true }
                 );
 
-                // Sacamos el nuevo token (como cambiaste tu interfaz a accessToken, lo leemos así)
                 const newAccessToken = refreshResponse.data.accessToken;
 
                 useAuthStore.getState().setToken(newAccessToken);
