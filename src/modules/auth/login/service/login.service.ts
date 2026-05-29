@@ -8,7 +8,7 @@ interface LoginResponse {
 export const loginUser = async (credentials: LoginType): Promise<LoginResponse> => {
 
     const { data } = await api.post<LoginResponse>('/autenticacion/login', credentials, {
-        withCredentials: true
+
     });
     return data;
 };
