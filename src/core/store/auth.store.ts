@@ -17,7 +17,7 @@ interface AuthState {
     clearAuth: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
     accessToken: null,
     isAuthenticated: false,
     roles: [],
@@ -33,6 +33,7 @@ export const useAuthStore = create<AuthState>((set) => ({
             });
         } catch (error) {
             console.error('Error decodificando el token');
+            get().clearAuth();
         }
     },
     clearAuth: () => set({ accessToken: null, isAuthenticated: false, roles: [] }),
