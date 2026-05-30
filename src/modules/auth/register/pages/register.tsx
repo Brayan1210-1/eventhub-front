@@ -98,7 +98,7 @@ export function RegisterForm() {
         <div className="pt-4">
           <Button
             type="submit"
-            className="w-full"
+            className="w-full text-white"
             disabled={isPending}
           >
             {isPending ? "Registrando..." : "Registrarme"}

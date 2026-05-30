@@ -37,9 +37,12 @@ apiClient.interceptors.response.use(
 
         const originalRequest = error.config as CustomAxiosRequestConfig;
 
-        if (error.response?.status === 401 && !originalRequest._retry) {
-
-            originalRequest._retry = true; // Marcamos para evitar bucles infinitos
+        if (
+            error.response?.status === 401 &&
+            !originalRequest._retry &&
+            !originalRequest.url?.includes('/autenticacion/refreshtoken')
+        ) {
+            originalRequest._retry = true;
 
             try {
 
@@ -62,7 +65,7 @@ apiClient.interceptors.response.use(
             } catch (refreshError) {
 
                 useAuthStore.getState().clearAuth();
-                window.location.href = '/login';
+                window.location.href = '/auth';
 
                 return Promise.reject(refreshError);
             }
