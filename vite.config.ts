@@ -12,7 +12,7 @@ export default defineConfig({
     tailwindcss()
 
   ],
-  base: '/eventhub-front',
+  // base: '/eventhub-front',
 
   resolve: {
     alias: {

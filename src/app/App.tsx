@@ -1,14 +1,20 @@
 
 import { AppRouter } from './AppRoutes'
-
+import { AuthInitializer } from '@/core/store/auth.initializer'
 import './index.css'
+import { BrowserRouter } from 'react-router-dom'
 
 
 
 function App() {
   return (
-
-    <AppRouter />
+    <>
+      <BrowserRouter>
+        <AuthInitializer >
+          <AppRouter />
+        </AuthInitializer>
+      </BrowserRouter>
+    </>
   )
 }
 

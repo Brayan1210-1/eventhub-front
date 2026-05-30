@@ -14,6 +14,7 @@ const navigationRoutes: RouteConfig[] = [
   { name: 'Mis Entradas', path: '/mis-entradas', allowedRoles: ['CLIENTE'] },
   { name: 'Panel Organizador', path: '/organizador/dashboard', allowedRoles: ['ADMIN', 'ORGANIZADOR'] },
   { name: 'Gestión EventHub', path: '/admin/usuarios', allowedRoles: ['ADMIN'] },
+  { name: 'Lugares', path: '/admin/lugares', allowedRoles: ['ADMIN'] }
 ];
 
 export function Navbar() {

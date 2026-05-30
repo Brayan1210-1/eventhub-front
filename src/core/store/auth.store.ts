@@ -13,14 +13,17 @@ interface AuthState {
     accessToken: string | null;
     isAuthenticated: boolean;
     roles: string[];
+    isInitializing: boolean;
     setToken: (token: string) => void;
     clearAuth: () => void;
+    finishInitializer: () => void;
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
     accessToken: null,
     isAuthenticated: false,
     roles: [],
+    isInitializing: true,
     setToken: (token) => {
         try {
 
@@ -36,5 +39,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
             get().clearAuth();
         }
     },
+
     clearAuth: () => set({ accessToken: null, isAuthenticated: false, roles: [] }),
+    finishInitializer: () => set({ isInitializing: false }),
 }));

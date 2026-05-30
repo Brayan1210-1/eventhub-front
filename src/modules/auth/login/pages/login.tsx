@@ -65,7 +65,7 @@ export function LoginForm() {
 
           <Button
             type="submit"
-            className="w-full mt-6"
+            className="w-full mt-6 text-white"
             disabled={isPending}
           >
             {isPending ? 'Iniciando sesión...' : 'Ingresar'}
