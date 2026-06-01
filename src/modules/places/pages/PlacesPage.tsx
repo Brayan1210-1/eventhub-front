@@ -7,6 +7,7 @@ import { Button } from "@/design/atoms/button";
 import { Card } from "@/design/atoms/card";
 import type { Location } from "../types/places.types";
 import type { PlaceFormData } from "../schemas/place.schema";
+import { ZonesModal } from "@/modules/zones/Components/ZonesModal";
 
 export default function PlacesPage() {
 
@@ -19,6 +20,8 @@ export default function PlacesPage() {
 
     const { data, isLoading, isError } = useLocations(page, size);
     const { createLocation, updateLocation, deleteLocation, isCreating, isUpdating } = useLocationMutations();
+
+    const [placeForZones, setPlaceForZones] = useState<Location | null>(null);
 
     // Handlers para las acciones
     const handleCreateSubmit = async (formData: PlaceFormData) => {
@@ -134,6 +137,7 @@ export default function PlacesPage() {
                                     location={location}
                                     onEdit={(loc) => setSelectedLocation(loc)}
                                     onDelete={handleDelete}
+                                    onManageZones={(loc) => setPlaceForZones(loc)}
                                 />
                             ))}
                         </div>
@@ -168,6 +172,17 @@ export default function PlacesPage() {
                         </div>
                     )}
                 </div>
+            )}
+            {/* 🌟 RENDERIZADO DEL MODAL DE ZONAS */}
+            {placeForZones && (
+                <ZonesModal
+                    place={{
+                        id: placeForZones.id,
+                        name: placeForZones.name,
+                        totalCapacity: placeForZones.totalCapacity
+                    }}
+                    onClose={() => setPlaceForZones(null)}
+                />
             )}
         </div>
     );
