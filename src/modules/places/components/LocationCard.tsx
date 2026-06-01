@@ -6,9 +6,12 @@ interface LocationCardProps {
     location: Location;
     onEdit: (location: Location) => void;
     onDelete: (id: number) => void;
+    onManageZones: (location: Location) => void;
 }
 
-export function LocationCard({ location, onEdit, onDelete }: LocationCardProps) {
+export function LocationCard({ location, onEdit, onDelete, onManageZones }: LocationCardProps) {
+
+
     return (
         <Card className="flex flex-col overflow-hidden shadow-md hover:shadow-lg transition-shadow">
 
@@ -41,21 +44,30 @@ export function LocationCard({ location, onEdit, onDelete }: LocationCardProps) 
 
 
 
-            <div className="p-4 border-t border-gray-100 flex gap-2">
-                <Button
-                    className="flex-1 bg-white border border-gray-300 text-gray-900 hover:bg-gray-50 transition-colors"
-                    onClick={() => onEdit(location)}
+            <div className="p-4 border-t border-gray-100 flex-col gap-2">
+                <div className="flex gap-2">
+                    <Button
+                        className="flex-1 bg-white border border-gray-300 text-gray-900 hover:bg-gray-50 transition-colors"
+                        onClick={() => onEdit(location)}
 
-                >
-                    Editar
-                </Button>
+                    >
+                        Editar
+                    </Button>
+                    <Button
+                        // Si ya está inactivo, deshabilitamos el botón y cambiamos el estilo
+                        disabled={!location.active}
+                        className={`flex-1 ${location.active ? 'bg-red-600 hover:bg-red-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+                        onClick={() => onDelete(location.id)}
+                    >
+                        {location.active ? 'Desactivar' : 'Desactivado'}
+                    </Button>
+                </div>
+
                 <Button
-                    // Si ya está inactivo, deshabilitamos el botón y cambiamos el estilo
-                    disabled={!location.active}
-                    className={`flex-1 ${location.active ? 'bg-red-600 hover:bg-red-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
-                    onClick={() => onDelete(location.id)}
+                    className="w-full bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors"
+                    onClick={() => onManageZones(location)}
                 >
-                    {location.active ? 'Desactivar' : 'Desactivado'}
+                    Gestionar Zonas
                 </Button>
             </div>
         </Card>
