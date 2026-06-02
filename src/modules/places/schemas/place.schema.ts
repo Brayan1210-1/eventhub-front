@@ -5,7 +5,7 @@ export const PlaceSchema = z.object({
     address: z.string().min(5, "La dirección es muy corta"),
     city: z.string().min(2, "La ciudad es obligatoria"),
 
-    totalCapacity: z.coerce.number({ error: "Debe ser un número" })
+    totalCapacity: z.number({ error: "Debe ser un número" })
         .int("Debe ser un número entero")
         .positive("La capacidad debe ser mayor a 0"),
 

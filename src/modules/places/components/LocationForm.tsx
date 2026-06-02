@@ -39,6 +39,7 @@ export function LocationForm({ initialData, onSubmit, isLoading, onCancel }: Loc
                 <Input
                     label="Nombre del Lugar"
                     placeholder="Ej: Teatro Metropolitano"
+                    className="bg-gray-100"
                     {...register("name")}
                     error={errors.name?.message}
                 />
@@ -46,11 +47,13 @@ export function LocationForm({ initialData, onSubmit, isLoading, onCancel }: Loc
                     label="Ciudad"
                     placeholder="Ej: Medellín"
                     {...register("city")}
+                    className="bg-gray-100"
                     error={errors.city?.message}
                 />
                 <Input
                     label="Dirección"
                     placeholder="Ej: Calle 123 # 45-67"
+                    className="bg-gray-100"
                     {...register("address")}
                     error={errors.address?.message}
                 />
@@ -58,6 +61,7 @@ export function LocationForm({ initialData, onSubmit, isLoading, onCancel }: Loc
                     type="number"
                     label="Capacidad Total"
                     placeholder="Ej: 1500"
+                    className="bg-gray-100"
                     {...register("totalCapacity")}
                     error={errors.totalCapacity?.message}
                 />
@@ -66,7 +70,7 @@ export function LocationForm({ initialData, onSubmit, isLoading, onCancel }: Loc
             <TextArea
                 label="Descripción"
                 placeholder="Describe las facilidades, acústica, parqueaderos..."
-
+                className="bg-gray-100"
                 {...register("description")}
                 error={errors.description?.message}
             />
@@ -79,10 +83,11 @@ export function LocationForm({ initialData, onSubmit, isLoading, onCancel }: Loc
                         placeholder="https://ejemplo.com/imagen.jpg"
                         {...register("imageUrl")}
                         error={errors.imageUrl?.message}
+                        className="bg-gray-100"
                     />
                 </div>
 
-                {/* Cuadro de previsualización (El detalle de UX) */}
+                {/* Cuadro de previsualización */}
                 <div className="w-full md:w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg overflow-hidden flex items-center justify-center bg-gray-50 shrink-0">
                     {imageUrl ? (
                         <img
@@ -104,13 +109,13 @@ export function LocationForm({ initialData, onSubmit, isLoading, onCancel }: Loc
             <div className="flex justify-end gap-4 mt-4 pt-4 border-t border-gray-100">
                 <Button
                     type="button"
-                    className="flex-1 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors"
+                    className="flex-1 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors "
                     onClick={onCancel}
                     disabled={isLoading}
                 >
                     Cancelar
                 </Button>
-                <Button type="submit" disabled={isLoading}>
+                <Button type="submit" disabled={isLoading} className="text-white">
                     {isLoading ? "Guardando..." : initialData ? "Actualizar Lugar" : "Crear Lugar"}
                 </Button>
             </div>

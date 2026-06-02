@@ -13,7 +13,7 @@ export const useRegister = () => {
         mutationFn: (data: RegisterType) => registerUser(data),
         onSuccess: (response) => {
 
-            console.log("=== RESPUESTA DEL BACKEND EN REGISTRO ===", response);
+
             setToken(response.accessToken);
 
             navigate('/', { replace: true });

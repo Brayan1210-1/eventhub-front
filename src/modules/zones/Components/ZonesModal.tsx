@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { ZoneForm } from "./ZoneForm";
-import { ConfirmModal } from "@/design/molecules/ConfirmModal"; // 🌟 Importamos tu nueva molécula
+import { ConfirmModal } from "@/design/molecules/ConfirmModal";
 import { useZonesByPlace, useDeleteZone } from "../hooks/zone.hooks";
+import { Button } from '@/design/atoms/button'
 import type { Zone } from "../types/zone.types";
 
 interface PlaceBasicInfo {
@@ -89,7 +90,7 @@ export function ZonesModal({ place, onClose }: ZonesModalProps) {
                             <div className="flex flex-col gap-4">
                                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-2">
                                     <h3 className="text-lg font-bold text-gray-800">Zonas Actuales</h3>
-                                    <button
+                                    <Button
                                         onClick={handleAddNew}
                                         disabled={capacidadDisponible <= 0}
                                         className={`w-full sm:w-auto px-4 py-2.5 rounded text-sm text-white font-medium transition-colors ${capacidadDisponible <= 0
@@ -98,7 +99,7 @@ export function ZonesModal({ place, onClose }: ZonesModalProps) {
                                             }`}
                                     >
                                         + Añadir Zona
-                                    </button>
+                                    </Button>
                                 </div>
 
                                 {isLoading ? (
@@ -164,7 +165,7 @@ export function ZonesModal({ place, onClose }: ZonesModalProps) {
             <ConfirmModal
                 isOpen={zoneToDelete !== null}
                 title="Eliminar Zona"
-                message="¿Estás seguro de eliminar esta localidad? Se perderán los datos asociados a la misma."
+                message="¿Estás seguro de eliminar esta zona? Se perderán los datos asociados a la misma."
                 confirmText="Sí, eliminar"
                 onConfirm={handleConfirmDelete}
                 onCancel={() => setZoneToDelete(null)}

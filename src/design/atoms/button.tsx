@@ -18,7 +18,8 @@ export function Button({ children, className = "", ...props }: ButtonProps) {
      transition-all duration-200
      active:scale-95 disabled:opacity-50
         
-        bg-primary hover:brightness-110      
+        bg-primary hover:brightness-110  
+            
         ${className}
       `}
       {...props}
