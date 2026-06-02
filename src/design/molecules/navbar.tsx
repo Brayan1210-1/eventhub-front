@@ -21,7 +21,7 @@ export function Navbar() {
   const { isAuthenticated, roles } = useAuthStore();
   const { mutate: handleLogout, isPending: isLoggingOut } = useLogout();
 
-  // 🌟 ESTADO NUEVO: Controla si el menú de celular está abierto
+  // Controla si el menú de celular está abierto
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const hasAccess = (allowedRoles: string[]) => {

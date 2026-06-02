@@ -92,10 +92,10 @@ export function ZoneForm({ placeId, initialData, onCancel, onSuccess }: ZoneForm
             )}
 
             <div className="flex justify-end gap-3 mt-4">
-                <Button type="button" onClick={onCancel} disabled={isPending} className="bg-gray-200 text-black">
+                <Button type="button" onClick={onCancel} disabled={isPending} className="bg-gray-200  text-white">
                     Cancelar
                 </Button>
-                <Button type="submit" disabled={isPending}>
+                <Button type="submit" className="text-white" disabled={isPending}>
                     {/* Cambiamos el texto del botón dinámicamente */}
                     {isPending ? "Guardando..." : (isEditing ? "Actualizar Zona" : "Crear Zona")}
                 </Button>

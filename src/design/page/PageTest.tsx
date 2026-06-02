@@ -1,5 +1,5 @@
-import { Button } from "../atoms/NewButton"
-import { Input } from "../atoms/NewInput"
+import { Button } from "../atoms/button"
+import { Input } from "../atoms/input"
 import { useState } from "react"
 
 export const PageTest = () => {
@@ -7,10 +7,12 @@ export const PageTest = () => {
     return (
 
         <>
-            <Button name="probando" onClick={() => console.log("hola")} style="bg-green-500" />
+            <Button name="probando" onClick={() => console.log("hola")} className="bg-green-500" >
+                jh
+            </Button>
 
             <Input label={"contraseña"}
-                placeHolder={"ingrese contraseña"}
+                placeholder={"ingrese contraseña"}
                 type={"password"} value={password} onChange={(e) => setPassword(e.target.value)} />
         </>
     )

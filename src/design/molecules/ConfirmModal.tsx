@@ -34,7 +34,7 @@ export function ConfirmModal({
                         <Button
                             type="button"
                             onClick={onCancel}
-                            className="bg-gray-200 text-gray-800 hover:bg-gray-300 transition-colors"
+                            className="bg-gray-200 text-white hover:bg-gray-300 transition-colors"
                         >
                             {cancelText}
                         </Button>
