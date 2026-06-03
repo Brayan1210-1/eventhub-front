@@ -5,6 +5,8 @@ import { Navbar } from "@/design/molecules/navbar";
 import { PageTest } from "@/design/page/PageTest";
 import { ProtectedRoute } from "./protectedRoutes";
 import PlacesPage from '@/modules/places/pages/PlacesPage'
+import { OrganizerDashboard } from "@/modules/events/Page/OrganizerDashboard";
+import { EventForm } from "@/modules/events/components/EventForm";
 
 export const AppRouter = () => {
     return (
@@ -30,8 +32,11 @@ export const AppRouter = () => {
                 </Route>
 
                 <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'ORGANIZADOR']} />}>
-                    <Route path="/organizador/dashboard" element={<div>Panel Organizador</div>} />
+                    <Route path="/organizador/dashboard" element={<OrganizerDashboard />} />
+                    <Route path="/crear" element={< EventForm />} />
                 </Route>
+
+
 
                 <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
                     <Route path="/admin/lugares" element={<PlacesPage />} />

@@ -1,4 +1,4 @@
-// 1. La entidad base (Lo que llega en el GET dentro de 'content')
+import { type PaginationMeta } from "@/utils/types/paginationMeta";
 export interface Location {
     id: number;
     name: string;
@@ -10,23 +10,25 @@ export interface Location {
     active: boolean;
 }
 
-// 2. La metadata de Paginación (Tu objeto 'meta')
-export interface PaginationMeta {
-    currentPage: number;
-    pageSize: number;
-    totalElements: number;
-    totalPages: number;
-    hasNext: boolean;
-    hasPrevious: boolean;
+export interface LocationList {
+    id: number,
+    name: string,
+    city: string,
+    totalCapacityZones: number,
+    totalZones: number
 }
 
-// 3. La respuesta completa del GET
+export interface PaginatedLocationList {
+    content: LocationList[],
+    meta: PaginationMeta
+}
+
 export interface PaginatedLocations {
     content: Location[];
     meta: PaginationMeta;
 }
 
-// 4. Lo que enviamos al POST
+
 export interface CreateLocationDTO {
     name: string;
     address: string;
