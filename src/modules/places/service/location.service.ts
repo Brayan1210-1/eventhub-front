@@ -28,3 +28,15 @@ export const deleteLocation = async (id: number): Promise<MessageResponse> => {
     const { data } = await api.delete(`/admin/eliminar/${id}`);
     return data;
 };
+
+export const searchPlaces = async (nombre: string, page: number, size: number) => {
+    const { data } = await api.get(`/lugares/buscar`, {
+        params: { nombre, page, size }
+    });
+    return data;
+};
+
+export const getPlaceById = async (placeId: number) => {
+    const { data } = await api.get(`/lugares/${placeId}`);
+    return data;
+}

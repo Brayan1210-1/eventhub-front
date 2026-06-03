@@ -15,7 +15,6 @@ export default function PlacesPage() {
     const [page, setPage] = useState(0);
     const size = 6;
 
-    // Estados para controlar el flujo de la UI (Lista vs Formulario)
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
 
@@ -24,7 +23,6 @@ export default function PlacesPage() {
     const [locationToDelete, setLocationToDelete] = useState<number | null>(null);
     const [placeForZones, setPlaceForZones] = useState<Location | null>(null);
 
-    // Handlers para las acciones
     const handleCreateSubmit = async (formData: PlaceFormData) => {
         try {
             await createLocation(formData);

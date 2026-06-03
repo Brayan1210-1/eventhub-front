@@ -39,7 +39,7 @@ export function LocationCard({ location, onEdit, onDelete, onManageZones }: Loca
                 </div>
             </div>
 
-            {/* 🌟 BOTONERA MINIMALISTA CON ÍCONOS COMPATIBLE CON TU CÓDIGO */}
+
             <div className="p-4 border-t border-gray-100 flex gap-2 bg-gray-50/50">
 
                 {/* Botón Editar (Lápiz) */}
@@ -53,7 +53,7 @@ export function LocationCard({ location, onEdit, onDelete, onManageZones }: Loca
                     </svg>
                 </Button>
 
-                {/* Botón Zonas (Mapa/Ubicación) */}
+                {/* Botón Zonas (Mapa) */}
                 <Button
                     className="flex-1 flex justify-center items-center bg-white border border-gray-200 text-indigo-600 hover:bg-indigo-50 hover:border-indigo-200 transition-colors py-2"
                     onClick={() => onManageZones(location)}
@@ -64,12 +64,12 @@ export function LocationCard({ location, onEdit, onDelete, onManageZones }: Loca
                     </svg>
                 </Button>
 
-                {/* Botón Eliminar (Basura) */}
+                {/* Botón Eliminar */}
                 <Button
                     disabled={!location.active}
                     className={`flex-1 flex justify-center items-center py-2 transition-colors ${location.active
-                            ? 'bg-white border border-gray-200 text-red-500 hover:bg-red-50 hover:border-red-200'
-                            : 'bg-gray-100 border border-gray-100 text-gray-300 cursor-not-allowed'
+                        ? 'bg-white border border-gray-200 text-red-500 hover:bg-red-50 hover:border-red-200'
+                        : 'bg-gray-100 border border-gray-100 text-gray-300 cursor-not-allowed'
                         }`}
                     onClick={() => onDelete(location.id)}
                     title={location.active ? "Desactivar Lugar" : "Lugar Desactivado"}
