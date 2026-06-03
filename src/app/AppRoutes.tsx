@@ -7,6 +7,7 @@ import { ProtectedRoute } from "./protectedRoutes";
 import PlacesPage from '@/modules/places/pages/PlacesPage'
 import { OrganizerDashboard } from "@/modules/events/Page/OrganizerDashboard";
 import { EventForm } from "@/modules/events/components/EventForm";
+import { ConfigureEventPage } from "@/modules/events/Page/ConfigureEventPage";
 
 export const AppRouter = () => {
     return (
@@ -34,6 +35,7 @@ export const AppRouter = () => {
                 <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'ORGANIZADOR']} />}>
                     <Route path="/organizador/dashboard" element={<OrganizerDashboard />} />
                     <Route path="/crear" element={< EventForm />} />
+                    <Route path="/evento/configurar" element={< ConfigureEventPage />} />
                 </Route>
 
 

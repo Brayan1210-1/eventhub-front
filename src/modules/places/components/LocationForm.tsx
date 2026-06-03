@@ -62,7 +62,7 @@ export function LocationForm({ initialData, onSubmit, isLoading, onCancel }: Loc
                     label="Capacidad Total"
                     placeholder="Ej: 1500"
                     className="bg-gray-100"
-                    {...register("totalCapacity")}
+                    {...register("totalCapacity", { valueAsNumber: true })}
                     error={errors.totalCapacity?.message}
                 />
             </div>
