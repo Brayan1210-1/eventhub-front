@@ -7,11 +7,16 @@ import type { EventStatus, Event } from "../types/event.types";
 export function OrganizerDashboard() {
     const [currentStatus, setCurrentStatus] = useState<EventStatus>('BORRADOR');
 
+    const [page, setPage] = useState(0);
+
     // 🌟 Instanciamos el hook de navegación
     const navigate = useNavigate();
+    const { data: eventsData, isLoading, isError } = useMyEvents(currentStatus, page);
 
-    const { data: eventsData, isLoading, isError } = useMyEvents(currentStatus);
-
+    const handleStatusChange = (status: EventStatus) => {
+        setCurrentStatus(status);
+        setPage(0); // Si cambio de estado, me devuelvo a la primera página
+    };
     return (
         <div className="max-w-7xl mx-auto p-6 md:p-8">
 
@@ -30,12 +35,11 @@ export function OrganizerDashboard() {
                 </button>
             </div>
 
-            {/* Pestañas de Filtro */}
             <div className="flex gap-2 border-b border-gray-200 mb-8 overflow-x-auto pb-2 bg-gray-50 px-2 pt-2 rounded-t-xl">
                 {(['BORRADOR', 'PUBLICADO', 'FINALIZADO', 'CANCELADO'] as EventStatus[]).map((status) => (
                     <button
                         key={status}
-                        onClick={() => setCurrentStatus(status)}
+                        onClick={() => handleStatusChange(status)}
                         className={`px-5 py-2.5 font-semibold text-sm rounded-t-xl transition-all whitespace-nowrap ${currentStatus === status
                             ? "bg-blue-50 text-blue-700 border-b-2 border-blue-700"
                             : "text-gray-500 hover:text-gray-800 hover:bg-gray-50"
@@ -70,14 +74,41 @@ export function OrganizerDashboard() {
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            {/* 🌟 Adiós any, usamos nuestra interfaz Event */}
                             {eventsData.content.map((evento: Event) => (
                                 <EventCard key={evento.id} event={evento} />
                             ))}
                         </div>
                     )}
+                    {/* 🌟 CONTROLES DE PAGINACIÓN */}
+                    {/* Cambia "eventsData.meta" por "eventsData" si usas el paginador crudo de Spring Boot */}
+                    {eventsData.meta && eventsData.meta.totalPages > 1 && (
+                        <div className="flex justify-center items-center gap-6 mt-10 pt-6 border-t border-gray-200">
+                            <button
+                                onClick={() => setPage((old) => Math.max(old - 1, 0))}
+                                disabled={page === 0}
+                                className="px-5 py-2.5 bg-white border border-gray-300 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                            >
+                                ← Anterior
+                            </button>
+
+                            <span className="text-sm font-medium text-gray-500">
+                                Página <span className="font-bold text-gray-900">{page + 1}</span> de {eventsData.meta.totalPages}
+                            </span>
+
+                            <button
+                                onClick={() => setPage((old) => old + 1)}
+                                disabled={page >= eventsData.meta.totalPages - 1}
+                                className="px-5 py-2.5 bg-white border border-gray-300 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                            >
+                                Siguiente →
+                            </button>
+                        </div>
+                    )}
                 </>
+
+
             )}
+
         </div>
     );
 }
