@@ -8,6 +8,7 @@ import PlacesPage from '@/modules/places/pages/PlacesPage'
 import { OrganizerDashboard } from "@/modules/events/Page/OrganizerDashboard";
 import { EventForm } from "@/modules/events/components/EventForm";
 import { ConfigureEventPage } from "@/modules/events/Page/ConfigureEventPage";
+import { PublicEventsPage } from "@/modules/public/pages/PublicEventPage";
 
 export const AppRouter = () => {
     return (
@@ -20,7 +21,8 @@ export const AppRouter = () => {
             <Route element={<Navbar />}>
 
 
-                <Route path="/eventos" element={<div>Página de todos los eventos (Pública)</div>} />
+                <Route path="/eventos" element={<PublicEventsPage />} />
+
 
                 <Route path="/auth" >
                     <Route index element={<LoginForm />} />
