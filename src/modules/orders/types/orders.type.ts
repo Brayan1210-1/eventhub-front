@@ -3,7 +3,7 @@ export interface PurchaseRequest {
 }
 
 export interface PurchaseResponse {
-    orderId: number; // El ID de la orden pendiente para luego procesar el pago
+    orderId: number;
     status: string;
     message?: string;
     expiresAt?: string; // (Opcional) Si el back te devuelve a qué hora caducan los 10 mins
