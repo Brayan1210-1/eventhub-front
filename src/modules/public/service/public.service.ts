@@ -1,5 +1,5 @@
 import api from "@/core/api/api-client";
-import type { EventFilters, PaginatedPublicEvents } from "../types/public.types";
+import type { EventDetailPublic, EventFilters, PaginatedPublicEvents } from "../types/public.types";
 
 export const publicService = {
     getPublicEvents: async (filters: EventFilters, page: number = 0): Promise<PaginatedPublicEvents> => {
@@ -17,6 +17,11 @@ export const publicService = {
             }
         });
 
+        return data;
+    },
+
+    getEventDetail: async (eventId: number): Promise<EventDetailPublic> => {
+        const { data } = await api.get<EventDetailPublic>(`/publico/eventos/detalle/evento/${eventId}`);
         return data;
     }
 };
