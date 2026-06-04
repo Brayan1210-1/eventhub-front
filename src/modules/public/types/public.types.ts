@@ -25,3 +25,24 @@ export interface PaginatedPublicEvents {
     content: PublicEvent[];
     meta: PaginationMeta;
 }
+
+export interface ZoneDetail {
+    id: number;
+    zoneName: string;
+    price: number;
+    availableQuantity: number;
+}
+
+export interface EventDetailPublic {
+    id: number;
+    name: string;
+    description: string;
+    eventDate: string; // "YYYY-MM-DD"
+    startTime: string; // "HH:mm:ss"
+    imageUrl: string;
+    placeName: string;
+    city: string;
+    address: string;
+    salesOpen: boolean;
+    zones: ZoneDetail[];
+}
