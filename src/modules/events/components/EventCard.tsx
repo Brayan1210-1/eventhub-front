@@ -67,13 +67,13 @@ export function EventCard({ event }: EventCardProps) {
     return (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col hover:shadow-md transition-shadow relative">
 
-            {!event.placeActive && (
+            {!event.placeActive && event.status !== 'CANCELADO' && (
                 <div className="absolute top-0 left-0 w-full bg-red-600 text-white text-xs font-bold text-center py-1.5 z-10 shadow-sm">
                     ⚠️ EL LUGAR YA NO ESTÁ DISPONIBLE
                 </div>
             )}
 
-            <div className={`h-48 bg-gray-200 relative ${!event.placeActive ? 'mt-6' : ''}`}>
+            <div className={`h-48 bg-gray-200 relative ${!event.placeActive && event.status !== 'CANCELADO' ? 'mt-6' : ''}`}>
                 {event.imageUrl ? (
                     <img src={event.imageUrl} alt={event.name} className="w-full h-full object-cover" />
                 ) : (
@@ -107,7 +107,7 @@ export function EventCard({ event }: EventCardProps) {
             <div className="p-4 border-t border-gray-100 bg-gray-50 mt-auto flex justify-end gap-2 items-center">
 
                 {/* Botón de Cambio de Lugar */}
-                {!event.placeActive && (
+                {!event.placeActive && event.status !== 'CANCELADO' && (
                     <Button className="grow bg-red-600 hover:bg-red-700 text-sm py-1.5">
                         Cambiar Lugar
                     </Button>
