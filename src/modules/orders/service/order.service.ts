@@ -1,5 +1,7 @@
 import api from "@/core/api/api-client";
-import type { PurchaseRequest, PurchaseResponse } from "../types/orders.type"; // Ajusta la ruta de tus tipos
+import type { ConfirmPayRequest, MyOrderDetailDTO, MyOrderDTO, OrderFilter, OrderResponse, PurchaseRequest, PurchaseResponse } from "../types/orders.type";
+import type { MessageResponse } from "@/utils/message.type";
+import type { PaginatedResponseDTO } from "@/utils/types/paginationMeta";
 
 export const orderService = {
 
@@ -12,6 +14,32 @@ export const orderService = {
             request
         );
 
+        return data;
+    },
+
+    confirmPayment: async (orderId: string, request: ConfirmPayRequest): Promise<OrderResponse> => {
+        const { data } = await api.post<OrderResponse>(`/ordenes/${orderId}/confirmar-pago`, request);
+        return data;
+    },
+
+    cancelOrder: async (orderId: string): Promise<MessageResponse> => {
+        const { data } = await api.patch<MessageResponse>(`/ordenes/${orderId}/cancelar`);
+        return data;
+    },
+
+    getMyOrders: async (filter: OrderFilter = 'UPCOMING', page: number = 0, size: number = 10): Promise<PaginatedResponseDTO<MyOrderDTO>> => {
+        const { data } = await api.get<PaginatedResponseDTO<MyOrderDTO>>(`/ordenes/mis-boletas`, {
+            params: { filter, page, size }
+        });
+        return data;
+    },
+    getPendingOrders: async (): Promise<MyOrderDTO[]> => {
+        const { data } = await api.get<MyOrderDTO[]>(`/ordenes/pendientes`);
+        return data;
+    },
+
+    getOrderDetail: async (orderId: string): Promise<MyOrderDetailDTO> => {
+        const { data } = await api.get<MyOrderDetailDTO>(`/ordenes/detalle/${orderId}`);
         return data;
     }
 };

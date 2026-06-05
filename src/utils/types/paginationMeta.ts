@@ -6,3 +6,8 @@ export interface PaginationMeta {
     hasNext: boolean;
     hasPrevious: boolean;
 }
+export interface PaginatedResponseDTO<T> {
+    content: T[];
+    meta: PaginationMeta;
+
+}

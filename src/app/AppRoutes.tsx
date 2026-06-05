@@ -10,6 +10,8 @@ import { EventForm } from "@/modules/events/components/EventForm";
 import { ConfigureEventPage } from "@/modules/events/Page/ConfigureEventPage";
 import { PublicEventsPage } from "@/modules/public/pages/PublicEventPage";
 import { PublicEventDetailPage } from "@/modules/public/pages/PublicEventDetailPage";
+import { MyOrdersDashboard } from "@/modules/orders/pages/MyOrdersDashBoard";
+import { PaymentPage } from "@/modules/orders/pages/PaymentPage";
 
 export const AppRouter = () => {
     return (
@@ -32,7 +34,8 @@ export const AppRouter = () => {
                 </Route>
 
                 <Route element={<ProtectedRoute allowedRoles={['CLIENTE']} />}>
-                    <Route path="/mis-entradas" element={<div>Mis Entradas</div>} />
+                    <Route path="/mis-entradas" element={<MyOrdersDashboard />} />
+                    <Route path="/pago/:orderId" element={<PaymentPage />} />
                 </Route>
 
                 <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'ORGANIZADOR']} />}>
