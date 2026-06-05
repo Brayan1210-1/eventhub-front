@@ -87,15 +87,36 @@ export function PublicEventDetailPage() {
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
             {/* Hero del Evento */}
-            <div className="bg-blue-900 text-white relative h-[40vh] min-h-[300px]">
+            <div className="bg-blue-900 text-white relative h-[40vh] min-h-75">
+
+
                 {event.imageUrl && (
                     <img src={event.imageUrl} alt={event.name} className="w-full h-full object-cover opacity-40 mix-blend-overlay" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900 via-transparent to-transparent"></div>
+
+                <div className="absolute inset-0 bg-linear-to-t from-blue-900 via-blue-900/40 to-transparent pointer-events-none"></div>
+
 
                 <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 max-w-6xl mx-auto">
+
+                    <button
+                        onClick={() => navigate('/eventos')}
+                        className="flex items-center gap-3 text-blue-200 hover:text-white transition-all font-bold text-lg md:text-xl mb-10 group w-fit outline-none"
+                    >
+                        <svg
+                            className="w-7 h-7 transform group-hover:-translate-x-2 transition-transform"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            {/* Aumentamos el strokeWidth a 2.5 para que la flecha sea más gordita */}
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Volver al catálogo
+                    </button>
                     <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight drop-shadow-md">
                         {event.name}
+
                     </h1>
                     <div className="flex flex-wrap gap-4 text-sm md:text-lg text-blue-100 font-medium">
                         <span className="flex items-center gap-2">📅 {formatearFecha(event.eventDate)} a las {event.startTime}</span>
@@ -150,7 +171,7 @@ export function PublicEventDetailPage() {
 
 
                     {event.imageUrl && (
-                        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden w-full h-[350px] group">
+                        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden w-full h-87.5 group">
                             <img
                                 src={event.imageUrl}
                                 alt={`Poster de ${event.name}`}
