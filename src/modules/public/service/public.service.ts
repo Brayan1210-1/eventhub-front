@@ -2,7 +2,7 @@ import api from "@/core/api/api-client";
 import type { EventDetailPublic, EventFilters, PaginatedPublicEvents } from "../types/public.types";
 
 export const publicService = {
-    getPublicEvents: async (filters: EventFilters, page: number = 0): Promise<PaginatedPublicEvents> => {
+    getPublicEvents: async (filters: EventFilters, page: number = 0, size: number): Promise<PaginatedPublicEvents> => {
         // Limpiamos el objeto: si un filtro está vacío o es undefined, no lo enviamos en la URL
         const cleanFilters = Object.fromEntries(
             Object.entries(filters).filter(([_, value]) => value !== "" && value !== undefined && value !== null)
@@ -13,7 +13,7 @@ export const publicService = {
             params: {
                 ...cleanFilters,
                 page,
-                size: 10 // Paginación por defecto
+                size
             }
         });
 
