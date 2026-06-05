@@ -6,9 +6,7 @@ export const usePublicEvents = (filters: EventFilters, page: number = 0) => {
     return useQuery({
 
         queryKey: ['publicEvents', filters, page],
-        queryFn: () => publicService.getPublicEvents(filters, page),
-        // keepPreviousData mantiene los eventos actuales en pantalla mientras cargan los nuevos 
-        // al cambiar de página, evitando el "parpadeo" blanco.
+        queryFn: () => publicService.getPublicEvents(filters, page, 10),
         placeholderData: keepPreviousData,
     });
 };

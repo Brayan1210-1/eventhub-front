@@ -13,7 +13,7 @@ const navigationRoutes: RouteConfig[] = [
   { name: 'Explorar Eventos', path: '/eventos', allowedRoles: [] },
   { name: 'Mis Entradas', path: '/mis-entradas', allowedRoles: ['CLIENTE'] },
   { name: 'Panel Organizador', path: '/organizador/dashboard', allowedRoles: ['ADMIN', 'ORGANIZADOR'] },
-  { name: 'Gestión EventHub', path: '/admin/usuarios', allowedRoles: ['ADMIN'] },
+  { name: 'Vender Boletas', path: '/vendedor', allowedRoles: ['VENDEDOR'] },
   { name: 'Lugares', path: '/admin/lugares', allowedRoles: ['ADMIN'] }
 ];
 

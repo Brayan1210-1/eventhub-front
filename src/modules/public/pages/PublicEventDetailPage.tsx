@@ -62,8 +62,8 @@ export function PublicEventDetailPage() {
         createOrderMutation.mutate(
             { eventId: Number(id), zoneId: purchaseIntent.zoneId, request: { quantity: purchaseIntent.quantity } },
             {
-                onSuccess: (response) => {
-                    setPurchaseIntent(null); // Cerramos el modal
+                onSuccess: () => {
+                    setPurchaseIntent(null);
                     setToast({ message: "¡Boletas reservadas! Redirigiendo al pago...", type: "success" });
                     // setTimeout(() => navigate(`/pago/${response.orderId}`), 1500);
                 },

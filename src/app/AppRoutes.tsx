@@ -12,7 +12,7 @@ import { PublicEventsPage } from "@/modules/public/pages/PublicEventPage";
 import { PublicEventDetailPage } from "@/modules/public/pages/PublicEventDetailPage";
 import { MyOrdersDashboard } from "@/modules/orders/pages/MyOrdersDashBoard";
 import { PaymentPage } from "@/modules/orders/pages/PaymentPage";
-
+import { SellerDashboardPage } from "@/modules/seller/pages/SellerDashboardPage";
 export const AppRouter = () => {
     return (
 
@@ -22,6 +22,7 @@ export const AppRouter = () => {
 
 
             <Route element={<Navbar />}>
+                <Route index element={<PublicEventsPage />} />
 
                 <Route path="/eventos" element={<PublicEventsPage />} />
                 <Route path="/evento/:id" element={<PublicEventDetailPage />} />
@@ -31,6 +32,11 @@ export const AppRouter = () => {
                     <Route index element={<LoginForm />} />
                     <Route path="/auth/registro" element={<RegisterForm />} />
 
+                </Route>
+
+                <Route element={<ProtectedRoute allowedRoles={['VENDEDOR']} />}>
+
+                    <Route path="/vendedor" element={<SellerDashboardPage />} />
                 </Route>
 
                 <Route element={<ProtectedRoute allowedRoles={['CLIENTE']} />}>
@@ -57,7 +63,7 @@ export const AppRouter = () => {
 
 
 
-        </Routes>
+        </Routes >
 
     );
 }
