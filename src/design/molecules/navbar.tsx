@@ -14,7 +14,8 @@ const navigationRoutes: RouteConfig[] = [
   { name: 'Mis Entradas', path: '/mis-entradas', allowedRoles: ['CLIENTE'] },
   { name: 'Panel Organizador', path: '/organizador/dashboard', allowedRoles: ['ADMIN', 'ORGANIZADOR'] },
   { name: 'Vender Boletas', path: '/vendedor', allowedRoles: ['VENDEDOR'] },
-  { name: 'Lugares', path: '/admin/lugares', allowedRoles: ['ADMIN'] }
+  { name: 'Lugares', path: '/admin/lugares', allowedRoles: ['ADMIN'] },
+  { name: 'Panel Admin', path: '/admin', allowedRoles: ['ADMIN'] }
 ];
 
 export function Navbar() {

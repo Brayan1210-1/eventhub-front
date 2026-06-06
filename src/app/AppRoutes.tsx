@@ -13,6 +13,7 @@ import { PublicEventDetailPage } from "@/modules/public/pages/PublicEventDetailP
 import { MyOrdersDashboard } from "@/modules/orders/pages/MyOrdersDashBoard";
 import { PaymentPage } from "@/modules/orders/pages/PaymentPage";
 import { SellerDashboardPage } from "@/modules/seller/pages/SellerDashboardPage";
+import { AdminDashboard } from "@/modules/admin/pages/AdminDashboard";
 export const AppRouter = () => {
     return (
 
@@ -26,6 +27,7 @@ export const AppRouter = () => {
 
                 <Route path="/eventos" element={<PublicEventsPage />} />
                 <Route path="/evento/:id" element={<PublicEventDetailPage />} />
+
 
 
                 <Route path="/auth" >
@@ -54,6 +56,7 @@ export const AppRouter = () => {
 
                 <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
                     <Route path="/admin/lugares" element={<PlacesPage />} />
+                    <Route path="/admin" element={<AdminDashboard />} />
                 </Route>
 
                 <Route path="/probando" element={<PageTest />} />
