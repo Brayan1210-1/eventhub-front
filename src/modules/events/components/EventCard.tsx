@@ -7,6 +7,7 @@ import { usePublishEvent } from "../hooks/usePublishEvent";
 import { getApiErrorMessage } from "@/utils/errorController";
 import { PromptModal } from "@/design/molecules/TextAreaModal";
 import { NotificationToast, type ToastType } from "@/design/molecules/NotificationToast";
+import { QRScannerModal } from "./QRScannerModal";
 
 interface EventCardProps {
     event: Event;
@@ -19,6 +20,8 @@ export function EventCard({ event }: EventCardProps) {
 
     const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
     const [toast, setToast] = useState<{ message: string, type: ToastType } | null>(null);
+    const [isScannerOpen, setIsScannerOpen] = useState(false);
+
 
     const handlePublish = () => {
         publishMutation.mutate(event.id, {
@@ -113,6 +116,30 @@ export function EventCard({ event }: EventCardProps) {
                     </Button>
                 )}
 
+                {event.status === 'PUBLICADO' && (
+                    <Button
+                        title="Validar Boletas"
+                        onClick={() => setIsScannerOpen(true)}
+                        className="p-2 text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 rounded-lg transition-colors focus:outline-none flex gap-2 items-center px-4"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="3" width="5" height="5" rx="1" />
+                            <rect x="16" y="3" width="5" height="5" rx="1" />
+                            <rect x="3" y="16" width="5" height="5" rx="1" />
+                            <path d="M21 16h-3a2 2 0 0 0-2 2v3" />
+                            <path d="M21 21v.01" />
+                            <path d="M12 7v3a2 2 0 0 1-2 2H7" />
+                            <path d="M3 12h.01" />
+                            <path d="M12 3h.01" />
+                            <path d="M12 16v.01" />
+                            <path d="M16 12h1" />
+                            <path d="M21 12v.01" />
+                            <path d="M12 21v-1" />
+                        </svg>
+                        <span className="text-sm font-semibold">Validar</span>
+                    </Button>
+                )}
+
                 {/* Botón Cancelar (Icono Tacho de Basura) */}
                 {(event.status === 'BORRADOR' || event.status === 'PUBLICADO') && (
                     <Button
@@ -175,6 +202,14 @@ export function EventCard({ event }: EventCardProps) {
                 minLength={10}
                 isPending={cancelMutation.isPending}
             />
+            {/* 👇 EL NUEVO MODAL DEL ESCÁNER (Lo dejaremos comentado hasta que lo crees en el paso 4) */}
+            {isScannerOpen && (
+                <QRScannerModal
+                    isOpen={isScannerOpen}
+                    onClose={() => setIsScannerOpen(false)}
+                    eventId={event.id}
+                />
+            )}
 
             {toast && (
                 <NotificationToast
