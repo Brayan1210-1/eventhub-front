@@ -9,7 +9,7 @@ interface TicketModalProps {
 
 export function TicketModal({ isOpen, orderId, onClose }: TicketModalProps) {
     // Si no hay orderId, no disparamos la petición
-    const { data: order, isLoading, isError } = useOrderDetail(isOpen && orderId ? orderId : "");
+    const { data: order, isLoading } = useOrderDetail(isOpen && orderId ? orderId : "");
 
     if (!isOpen) return null;
 
