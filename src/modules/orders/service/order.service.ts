@@ -2,13 +2,13 @@ import api from "@/core/api/api-client";
 import type { ConfirmPayRequest, MyOrderDetailDTO, MyOrderDTO, OrderFilter, OrderResponse, PurchaseRequest, PurchaseResponse } from "../types/orders.type";
 import type { MessageResponse } from "@/utils/message.type";
 import type { PaginatedResponseDTO } from "@/utils/types/paginationMeta";
+import type { OrderHistoryParams, PaginatedOrderHistory } from "../types/ordersReport.type";
 
 export const orderService = {
 
-    // 🌟 Método para US-012 (Requiere Token, el api-client ya lo inyecta)
+
     createPurchaseOrder: async (eventId: number, zoneId: number, request: PurchaseRequest): Promise<PurchaseResponse> => {
 
-        // CUIDADO: Asegúrate de cambiar el backend a @PostMapping
         const { data } = await api.post<PurchaseResponse>(
             `/ordenes/evento/${eventId}/zona/${zoneId}`,
             request
@@ -40,6 +40,14 @@ export const orderService = {
 
     getOrderDetail: async (orderId: string): Promise<MyOrderDetailDTO> => {
         const { data } = await api.get<MyOrderDetailDTO>(`/ordenes/detalle/${orderId}`);
+        return data;
+    },
+
+    getOrganizerSalesHistory: async (params: OrderHistoryParams): Promise<PaginatedOrderHistory> => {
+        // Axios serializa automáticamente el objeto params en la URL (ej: ?eventId=5&page=0&size=10)
+        const { data } = await api.get<PaginatedOrderHistory>('/eventos/mis-ventas', {
+            params
+        });
         return data;
     }
 };
