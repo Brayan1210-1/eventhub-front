@@ -8,6 +8,7 @@ import { getApiErrorMessage } from "@/utils/errorController";
 import { PromptModal } from "@/design/molecules/TextAreaModal";
 import { NotificationToast, type ToastType } from "@/design/molecules/NotificationToast";
 import { QRScannerModal } from "./QRScannerModal";
+import { EventReportModal } from "./EventReportModal";
 
 interface EventCardProps {
     event: Event;
@@ -21,6 +22,7 @@ export function EventCard({ event }: EventCardProps) {
     const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
     const [toast, setToast] = useState<{ message: string, type: ToastType } | null>(null);
     const [isScannerOpen, setIsScannerOpen] = useState(false);
+    const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
 
     const handlePublish = () => {
@@ -136,7 +138,22 @@ export function EventCard({ event }: EventCardProps) {
                             <path d="M21 12v.01" />
                             <path d="M12 21v-1" />
                         </svg>
-                        <span className="text-sm font-semibold">Validar</span>
+                        <span className="text-sm font-semibold"></span>
+                    </Button>
+                )}
+                {(event.status === 'PUBLICADO' || event.status === 'FINALIZADO') && (
+                    <Button
+                        title="Ver Reporte"
+                        onClick={() => setIsReportModalOpen(true)}
+                        // Aquí reutilizamos tu átomo pero sobrescribimos el color con tonos Púrpuras
+                        className="p-2 text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700 rounded-lg transition-colors focus:outline-none flex gap-2 items-center px-4"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="18" y1="20" x2="18" y2="10" />
+                            <line x1="12" y1="20" x2="12" y2="4" />
+                            <line x1="6" y1="20" x2="6" y2="14" />
+                        </svg>
+                        <span className="text-sm font-semibold hidden md:inline"></span>
                     </Button>
                 )}
 
@@ -207,6 +224,14 @@ export function EventCard({ event }: EventCardProps) {
                 <QRScannerModal
                     isOpen={isScannerOpen}
                     onClose={() => setIsScannerOpen(false)}
+                    eventId={event.id}
+                />
+            )}
+
+            {isReportModalOpen && (
+                <EventReportModal
+                    isOpen={isReportModalOpen}
+                    onClose={() => setIsReportModalOpen(false)}
                     eventId={event.id}
                 />
             )}

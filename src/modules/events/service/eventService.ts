@@ -3,6 +3,7 @@ import type { CreateEventFormData } from "../schema/createEventSchema";
 import type { EventStatus } from '../types/event.types';
 import type { MessageResponse } from "@/utils/message.type";
 import type { TicketValidationRequest, TicketValidationResponse } from "../types/scanner.types";
+import type { EventReport } from "../types/eventReport.type";
 
 export const getMyEvents = async (status: EventStatus, page: number, size: number) => {
     const { data } = await api.get(`/eventos/mis-eventos`, {
@@ -35,4 +36,9 @@ export const validateTicket = async (
         data
     );
     return response.data;
+};
+export const getEventReport = async (eventId: number): Promise<EventReport> => {
+
+    const { data } = await api.get<EventReport>(`/eventos/${eventId}/reporte`);
+    return data;
 };
