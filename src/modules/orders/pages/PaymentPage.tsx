@@ -24,7 +24,7 @@ export function PaymentPage() {
         confirmMutation.mutate(
             { orderId, request: { paymentMethod: method, paymentReference: mockReference } },
             {
-                onSuccess: () => navigate("/mis-boletas")
+                onSuccess: () => navigate("/mis-entradas")
             }
         );
     };
@@ -34,7 +34,7 @@ export function PaymentPage() {
         cancelMutation.mutate(orderId, {
             onSuccess: () => {
                 setIsCancelModalOpen(false);
-                navigate("/mis-boletas");
+                navigate("/mis-entradas");
             }
         });
     };
@@ -50,7 +50,7 @@ export function PaymentPage() {
                 {/* HEADER CON BOTÓN DE RETROCESO */}
                 <div className="bg-blue-900 p-6 text-center relative">
                     <button
-                        onClick={() => navigate('/mis-boletas')}
+                        onClick={() => navigate('/mis-entradas')}
                         className="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-blue-200 hover:text-white transition-colors rounded-full hover:bg-blue-800"
                         title="Volver a mis boletas"
                     >

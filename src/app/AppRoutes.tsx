@@ -14,6 +14,7 @@ import { MyOrdersDashboard } from "@/modules/orders/pages/MyOrdersDashBoard";
 import { PaymentPage } from "@/modules/orders/pages/PaymentPage";
 import { SellerDashboardPage } from "@/modules/seller/pages/SellerDashboardPage";
 import { AdminDashboard } from "@/modules/admin/pages/AdminDashboard";
+import { NotFoundPage } from "@/design/page/NotFound";
 export const AppRouter = () => {
     return (
 
@@ -60,7 +61,7 @@ export const AppRouter = () => {
                 </Route>
 
                 <Route path="/probando" element={<PageTest />} />
-                <Route path="*" element={<h1>páginas en proceso...</h1>} />
+                <Route path="*" element={<NotFoundPage />} />
 
             </Route>
 

@@ -5,7 +5,7 @@ export interface TicketValidationRequest {
 }
 
 export interface TicketValidationResponse {
-    isValid: boolean;
+    valid: boolean;
     message: string;
     attendeeName?: string;
     attendeeDocument?: string;

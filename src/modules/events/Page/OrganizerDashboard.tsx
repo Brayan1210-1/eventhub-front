@@ -3,13 +3,14 @@ import { useMyEvents } from "../hooks/useMyEvents";
 import { EventCard } from "../components/EventCard";
 import type { EventStatus, Event } from "../types/event.types";
 import { SalesHistoryTab } from "../../orders/components/SalesHistoryTab";
+import { useNavigate } from "react-router-dom";
 
 export function OrganizerDashboard() {
 
     const [currentStatus, setCurrentStatus] = useState<EventStatus>('BORRADOR');
     const [page, setPage] = useState(0);
     const [activeTab, setActiveTab] = useState<'events' | 'sales'>('events');
-
+    const navigate = useNavigate();
 
     const { data: eventsData, isLoading, isError } = useMyEvents(currentStatus, page);
 
@@ -58,6 +59,14 @@ export function OrganizerDashboard() {
 
             {activeTab === 'events' && (
                 <>
+                    <div className="flex justify-end mb-4">
+                        <button
+                            onClick={() => navigate('/crear')}
+                            className="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold shadow-sm hover:bg-blue-700 transition-all hover:shadow-md"
+                        >
+                            + Crear Nuevo Evento
+                        </button>
+                    </div>
                     {/* Filtros de estado */}
                     <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
                         {(['BORRADOR', 'PUBLICADO', 'FINALIZADO', 'CANCELADO'] as EventStatus[]).map((status) => (

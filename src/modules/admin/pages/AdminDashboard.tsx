@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useGeneralReport } from "../hooks/useGeneralReports";
+import { CreateUserForm } from "../components/CreateUserForm";
 
 export function AdminDashboard() {
 
@@ -13,7 +14,6 @@ export function AdminDashboard() {
         fechaFin
     });
 
-    // Helper para formatear dinero
     const formatCurrency = (amount: number) => {
         return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(amount);
     };
@@ -21,7 +21,7 @@ export function AdminDashboard() {
     return (
         <div className="max-w-7xl mx-auto p-6 md:p-8">
 
-            {/* Encabezado: Le damos un fondo oscuro para diferenciarlo claramente del dashboard del organizador */}
+            {/* Encabezado*/}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 bg-gray-900 text-white p-6 md:p-8 rounded-2xl shadow-lg">
                 <div>
                     <h1 className="text-3xl font-extrabold tracking-tight">Panel de Administrador</h1>
@@ -29,7 +29,7 @@ export function AdminDashboard() {
                 </div>
             </div>
 
-            {/* Menú de Pestañas estilo Píldora */}
+            {/* Menú de Pestañas  */}
             <div className="flex mb-8 bg-white p-1.5 rounded-xl shadow-sm border border-gray-200 w-full md:w-max overflow-x-auto">
                 <button
                     className={`flex-1 md:flex-none py-2.5 px-6 font-bold text-sm transition-all rounded-lg whitespace-nowrap ${activeTab === 'report'
@@ -51,9 +51,9 @@ export function AdminDashboard() {
                 </button>
             </div>
 
-            {/* =========================================
-                VISTA 1: REPORTE GENERAL
-            ========================================= */}
+            {/*
+               REPORTE GENERAL
+           */}
             {activeTab === 'report' && (
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 md:p-6 min-h-125">
                     <div className="mb-6">
@@ -84,7 +84,7 @@ export function AdminDashboard() {
                         </div>
                     </div>
 
-                    {/* Resultados Dinámicos */}
+                    {/* Resultados  */}
                     {!fechaInicio || !fechaFin ? (
                         <div className="text-center p-12 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50">
                             <p className="text-gray-500 font-medium">Selecciona una fecha de inicio y fin para calcular el reporte.</p>
@@ -174,21 +174,11 @@ export function AdminDashboard() {
                 </div>
             )}
 
-            {/* =========================================
-                VISTA 2: GESTIÓN DE USUARIOS (EN CONSTRUCCIÓN)
-            ========================================= */}
+            {/* 
+                CREACION DE USUARIOS (EN CONSTRUCCIÓN)
+            */}
             {activeTab === 'users' && (
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center flex flex-col items-center justify-center min-h-125 animate-in fade-in zoom-in duration-300">
-                    <div className="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                    </div>
-                    <h2 className="text-3xl font-black text-gray-900 mb-3">Gestión de Accesos</h2>
-                    <p className="text-gray-500 max-w-lg text-lg">
-                        Pronto podrás crear cuentas manuales, asignar roles (<span className="font-bold text-gray-700">Organizador, Vendedor, Validador</span>) y auditar a los usuarios de la plataforma desde aquí.
-                    </p>
-                </div>
+                <CreateUserForm />
             )}
 
         </div>

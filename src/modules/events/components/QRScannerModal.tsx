@@ -25,7 +25,6 @@ export function QRScannerModal({ isOpen, onClose, eventId }: QRScannerModalProps
             return;
         }
 
-        // Damos un pequeño retraso para asegurar que el div "qr-reader" ya esté montado en el DOM
         const timer = setTimeout(() => {
             initializeScanner();
         }, 100);
@@ -43,10 +42,10 @@ export function QRScannerModal({ isOpen, onClose, eventId }: QRScannerModalProps
             scannerRef.current = html5QrCode;
 
             await html5QrCode.start(
-                { facingMode: "environment" }, // Usa la cámara trasera por defecto
+                { facingMode: "environment" },
                 {
-                    fps: 10, // Escanea 10 veces por segundo
-                    qrbox: { width: 250, height: 250 }, // Cuadro guía
+                    fps: 10,
+                    qrbox: { width: 250, height: 250 },
                     aspectRatio: 1.0,
                 },
                 (decodedText) => {
@@ -86,7 +85,7 @@ export function QRScannerModal({ isOpen, onClose, eventId }: QRScannerModalProps
             onError: (error: any) => {
                 // Si el backend tira un error genérico (ej. 500 o CORS), armamos un mensaje rojo
                 setScanResult({
-                    isValid: false,
+                    valid: false,
                     message: error?.response?.data?.message || "Error de conexión al validar la boleta."
                 });
             }
@@ -146,48 +145,62 @@ export function QRScannerModal({ isOpen, onClose, eventId }: QRScannerModalProps
 
                     {/* Resultados de la validación */}
                     {scanResult && (
-                        <div className="w-full flex flex-col items-center animate-in fade-in zoom-in duration-300">
+                        <div className="w-full flex flex-col items-center animate-in zoom-in duration-300">
 
-                            {/* Icono de Éxito o Error */}
-                            <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-4 ${scanResult.isValid ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
-                                {scanResult.isValid ? (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
-                                ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" /></svg>
-                                )}
-                            </div>
-
-                            <h3 className={`text-2xl font-black text-center mb-2 ${scanResult.isValid ? 'text-green-600' : 'text-red-600'}`}>
-                                {scanResult.isValid ? '¡ACCESO PERMITIDO!' : 'ACCESO DENEGADO'}
-                            </h3>
-
-                            <p className="text-center text-gray-600 mb-6 px-4 font-medium">
-                                {scanResult.message}
-                            </p>
-
-                            {/* Datos del Asistente (Si vienen en el DTO) */}
-                            {scanResult.attendeeName && (
-                                <div className="w-full bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100 space-y-2">
-                                    <div className="flex justify-between text-sm">
-                                        <span className="text-gray-500">Asistente:</span>
-                                        <span className="font-bold text-gray-900">{scanResult.attendeeName}</span>
+                            {scanResult.valid ? (
+                                /* 
+                                     (ACCESO PERMITIDO)
+                                    */
+                                <>
+                                    <div className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4 shadow-sm border-4 border-green-50">
+                                        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
+                                        </svg>
                                     </div>
-                                    {scanResult.attendeeDocument && (
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-gray-500">Documento:</span>
-                                            <span className="font-bold text-gray-900">{scanResult.attendeeDocument}</span>
-                                        </div>
-                                    )}
-                                    {scanResult.zoneName && (
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-gray-500">Zona / Localidad:</span>
-                                            <span className="font-black text-blue-600">{scanResult.zoneName}</span>
-                                        </div>
-                                    )}
-                                </div>
+                                    <h3 className="text-3xl font-black text-green-600 mb-1 tracking-tight">ACCESO PERMITIDO</h3>
+                                    <p className="text-gray-500 font-bold mb-6 text-center">{scanResult.message}</p>
+
+                                    {/* Tarjeta con los datos del asistente */}
+                                    <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 w-full mb-6">
+                                        {scanResult.attendeeName && (
+                                            <div className="flex justify-between items-center mb-2">
+                                                <span className="text-gray-500 text-sm">Asistente:</span>
+                                                <span className="font-black text-gray-900">{scanResult.attendeeName}</span>
+                                            </div>
+                                        )}
+                                        {scanResult.attendeeDocument && (
+                                            <div className="flex justify-between items-center mb-2">
+                                                <span className="text-gray-500 text-sm">Documento:</span>
+                                                <span className="font-black text-gray-900">{scanResult.attendeeDocument}</span>
+                                            </div>
+                                        )}
+                                        {scanResult.zoneName && (
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-gray-500 text-sm">Zona / Localidad:</span>
+                                                <span className="font-black text-blue-700">{scanResult.zoneName}</span>
+                                            </div>
+                                        )}
+                                    </div>
+                                </>
+                            ) : (
+                                /* 
+                                   (ACCESO DENEGADO)
+                                    */
+                                <>
+                                    <div className="w-24 h-24 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4 shadow-sm border-4 border-red-50">
+                                        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </div>
+                                    <h3 className="text-3xl font-black text-red-600 mb-1 tracking-tight">ACCESO DENEGADO</h3>
+                                    <p className="text-gray-600 font-medium mb-6 text-center text-lg">{scanResult.message}</p>
+                                </>
                             )}
 
-                            <Button onClick={handleScanNext} className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-200">
+                            <Button
+                                onClick={handleScanNext}
+                                className="w-full bg-slate-700 hover:bg-slate-800 text-white font-bold py-4 rounded-xl text-lg shadow-lg transition-all"
+                            >
                                 Escanear siguiente boleta
                             </Button>
                         </div>
