@@ -36,7 +36,7 @@ export function ConfigureEventPage() {
         <div className="max-w-6xl mx-auto p-6 md:p-8">
 
             {/* Encabezado con Botón de Regreso/Finalizar */}
-            <div className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-200 pb-6 gap-4">
+            <div className="bg-gray-50 p-2 m-2 rounded-2xl mb-8 flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-200 pb-6 gap-4">
                 <div>
                     <button
                         onClick={() => navigate(-1)}
