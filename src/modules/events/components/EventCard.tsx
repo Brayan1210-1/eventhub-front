@@ -120,7 +120,7 @@ export function EventCard({ event }: EventCardProps) {
                     <Button
                         title="Validar Boletas"
                         onClick={() => setIsScannerOpen(true)}
-                        className="p-2 text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 rounded-lg transition-colors focus:outline-none flex gap-2 items-center px-4"
+                        className="p-2 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 rounded-lg transition-colors focus:outline-none flex gap-2 items-center px-4 text-white"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <rect x="3" y="3" width="5" height="5" rx="1" />
