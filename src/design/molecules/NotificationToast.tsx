@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Button } from "../atoms/button";
 
 export type ToastType = 'success' | 'error' | 'warning';
 
@@ -61,7 +62,7 @@ export function NotificationToast({
                 <p className="text-sm font-medium leading-tight">
                     {message}
                 </p>
-                <button
+                <Button
                     onClick={onClose}
                     className="ml-auto shrink-0 p-1 opacity-50 hover:opacity-100 transition-opacity focus:outline-none"
                     aria-label="Cerrar notificación"
@@ -69,7 +70,7 @@ export function NotificationToast({
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
-                </button>
+                </Button>
             </div>
         </div>
     );
