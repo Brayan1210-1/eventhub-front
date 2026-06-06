@@ -6,6 +6,7 @@ import { useCreateUser } from "../hooks/useCreateUser";
 import { Button } from "@/design/atoms/button";
 import { getApiErrorMessage } from "@/utils/errorController";
 import { NotificationToast, type ToastType } from "@/design/molecules/NotificationToast";
+import { Input } from "@/design/atoms/input";
 
 export function CreateUserForm() {
     const { register, handleSubmit, formState: { errors }, reset, setValue, watch } = useForm<AdminUserRegisterType>({
@@ -16,7 +17,6 @@ export function CreateUserForm() {
     const [toast, setToast] = useState<{ message: string, type: ToastType } | null>(null);
     const createUserMutation = useCreateUser();
 
-    // Observar los roles seleccionados para pintar los botones (checkboxes visuales)
     const currentRoles = watch("roles");
 
     const toggleRole = (role: UserRole) => {
@@ -29,9 +29,9 @@ export function CreateUserForm() {
     const onSubmit = (data: AdminUserRegisterType) => {
         createUserMutation.mutate(data, {
             onSuccess: (response) => {
-                // response ahora está tipado como MessageDTO gracias a tu configuración
+
                 setToast({ message: response.message || "Usuario creado exitosamente", type: 'success' });
-                reset(); // Limpia el formulario completo
+                reset();
             },
             onError: (error) => {
                 setToast({ message: getApiErrorMessage(error), type: 'error' });
@@ -39,7 +39,6 @@ export function CreateUserForm() {
         });
     };
 
-    // Roles disponibles en tu sistema mapeados exactamente a tu enum de Java
     const availableRoles: { id: UserRole; label: string; icon: string }[] = [
         { id: 'ADMIN', label: 'Administrador', icon: '🛡️' },
         { id: 'ORGANIZADOR', label: 'Organizador', icon: '🏢' },
@@ -96,8 +95,9 @@ export function CreateUserForm() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-gray-100">
 
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-sm font-bold text-gray-700">Nombres *</label>
-                        <input
+
+                        <Input
+                            label="Nombres"
                             {...register("name")}
                             placeholder="Ej: Juan Carlos"
                             className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
@@ -106,8 +106,9 @@ export function CreateUserForm() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-sm font-bold text-gray-700">Apellidos *</label>
-                        <input
+
+                        <Input
+                            label="Apellidos*"
                             {...register("lastName")}
                             placeholder="Ej: Pérez Gómez"
                             className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
@@ -116,8 +117,9 @@ export function CreateUserForm() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-sm font-bold text-gray-700">Documento de Identidad *</label>
-                        <input
+
+                        <Input
+                            label="Documento de Identidad *"
                             {...register("document")}
                             placeholder="Ej: 1020304050"
                             className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
@@ -126,8 +128,9 @@ export function CreateUserForm() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-sm font-bold text-gray-700">Teléfono</label>
-                        <input
+
+                        <Input
+                            label="Teléfono"
                             {...register("phone")}
                             placeholder="Ej: 3001234567"
                             className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
@@ -136,8 +139,9 @@ export function CreateUserForm() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-sm font-bold text-gray-700">Correo Electrónico *</label>
-                        <input
+
+                        <Input
+                            label="Correo Electrónico"
                             type="email"
                             {...register("email")}
                             placeholder="usuario@empresa.com"
@@ -147,8 +151,9 @@ export function CreateUserForm() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-sm font-bold text-gray-700">Contraseña Temporal *</label>
-                        <input
+
+                        <Input
+                            label="Contraseña temporal"
                             type="text"
                             {...register("password")}
                             placeholder="Mínimo 6 caracteres"
