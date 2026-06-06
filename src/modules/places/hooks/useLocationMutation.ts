@@ -12,17 +12,17 @@ export const useLocationMutations = () => {
 
     const createMutation = useMutation({
         mutationFn: (data: CreateLocationDTO) => createLocation(data),
-        onSuccess: (data) => { invalidateLocations() },
+        onSuccess: () => { invalidateLocations() },
     });
 
     const updateMutation = useMutation({
         mutationFn: ({ id, data }: { id: number; data: UpdateLocationDTO }) => updateLocation(id, data),
-        onSuccess: (data) => { invalidateLocations() },
+        onSuccess: () => { invalidateLocations() },
     });
 
     const deleteMutation = useMutation({
         mutationFn: (id: number) => deleteLocation(id),
-        onSuccess: (data) => { invalidateLocations() },
+        onSuccess: () => { invalidateLocations() },
     });
 
     return {

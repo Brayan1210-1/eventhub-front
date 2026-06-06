@@ -51,8 +51,9 @@ export function QRScannerModal({ isOpen, onClose, eventId }: QRScannerModalProps
                 (decodedText) => {
                     handleScanSuccess(decodedText, html5QrCode);
                 },
-                (errorMessage) => {
+                (_errorMessage) => {
                     // ignoramos los errores de lectura frame a frame (son normales cuando no hay QR enfocado)
+
                 }
             );
         } catch (err) {

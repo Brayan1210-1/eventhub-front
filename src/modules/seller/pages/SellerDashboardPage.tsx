@@ -5,7 +5,7 @@ import type { PublicEvent } from "@/modules/public/types/public.types";
 import { useEventDetail } from "@/modules/public/hooks/useEventDetails";
 
 export function SellerDashboardPage() {
-    const [page, setPage] = useState(0);
+    const [page,] = useState(0);
 
     const [selectedEvent, setSelectedEvent] = useState<PublicEvent | null>(null);
     const [selectedZoneId, setSelectedZoneId] = useState<number | null>(null);
